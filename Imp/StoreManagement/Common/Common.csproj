@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>SystemGroup.Training.StoreManagement.Common</RootNamespace>
+		<AssemblyName>SystemGroup.Training.StoreManagement.Common</AssemblyName>
+		<TargetFramework>net48</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>..\..\..\..\Bin\</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="System.Data.Linq">
+			<HintPath>$(OutputPath)\System.Data.Linq.dll</HintPath>
+		</Reference>
+		<Reference Include="SystemGroup.Framework">
+			<HintPath>$(OutputPath)\SystemGroup.Framework.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

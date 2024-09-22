@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>SystemGroup.Training.Pricing.CommonUI</RootNamespace>
+		<AssemblyName>SystemGroup.Training.Pricing.CommonUI</AssemblyName>
+		<TargetFramework>net48</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>..\..\..\..\Bin\</OutputPath>
+	</PropertyGroup>
+
+</Project>

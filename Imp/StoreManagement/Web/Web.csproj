@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  	<PropertyGroup>
+		<RootNamespace>SystemGroup.Training.StoreManagement.Web</RootNamespace>
+		<AssemblyName>SystemGroup.Training.StoreManagement.Web</AssemblyName>
+		<TargetFramework>net481</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>..\..\..\..\Bin\</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="System.Data.Linq">
+			<HintPath>$(OutputPath)\System.Data.Linq.dll</HintPath>
+		</Reference>
+		<Reference Include="SystemGroup.Framework">
+			<HintPath>$(OutputPath)\SystemGroup.Framework.dll</HintPath>
+		</Reference>
+		<Reference Include="SystemGroup.General.FirstComponent.Common">
+			<HintPath>$(OutputPath)\SystemGroup.Training.StoreManagement.Common.dll</HintPath>
+		</Reference>
+		<Reference Include="SystemGroup.Web">
+			<HintPath>$(OutputPath)\SystemGroup.Web.dll</HintPath>
+		</Reference>
+		<WebReferences Include="SystemGroup.Web;Telerik.Web.UI" />
+		<Reference Include="Telerik.Web.UI">
+			<HintPath>$(OutputPath)\Telerik.Web.UI.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	
+</Project>
