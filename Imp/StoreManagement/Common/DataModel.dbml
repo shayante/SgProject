@@ -8,7 +8,7 @@
       <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(28,6) NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Part_InventoryVoucherItem" Member="Part" ThisKey="ID" OtherKey="ID" Type="Part" IsForeignKey="true" />
-      <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucher" ThisKey="InventoryVoucherRef" OtherKey="InventoryVoucherID" Type="InventoryVoucher" IsForeignKey="true" />
+      <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucher" ThisKey="InventoryVoucherRef" OtherKey="ID" Type="InventoryVoucher" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="TRN3.Part" Member="Parts">
@@ -61,19 +61,19 @@
   </Table>
   <Table Name="TRN3.InventoryVoucher" Member="InventoryVouchers">
     <Type Name="InventoryVoucher">
-      <Column Name="InventoryVoucherID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="InventoryVoucherID" Member="ID" Modifier="Override" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Number" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="InventoryVoucherType" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="StoreRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="StoreKeeperRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="InventoryVoucherState" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="Creator" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="LastModifier" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="LastModificationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucherItems" ThisKey="InventoryVoucherID" OtherKey="InventoryVoucherRef" Type="InventoryVoucherItem" />
+      <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucherItems" ThisKey="ID" OtherKey="InventoryVoucherRef" Type="InventoryVoucherItem" />
       <Association Name="StoreKeeper_InventoryVoucher" Member="StoreKeeper" ThisKey="StoreKeeperRef" OtherKey="ID" Type="StoreKeeper" IsForeignKey="true" />
       <Association Name="Store_InventoryVoucher" Member="Store" ThisKey="StoreRef" OtherKey="ID" Type="Store" IsForeignKey="true" />
     </Type>

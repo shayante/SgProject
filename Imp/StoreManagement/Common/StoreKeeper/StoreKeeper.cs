@@ -1,32 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using SystemGroup.Framework.Business;
 using SystemGroup.Framework.Common;
+using SystemGroup.Framework.Lookup;
 using SystemGroup.Framework.MetaData;
 using SystemGroup.Framework.MetaData.Mapping;
+using SystemGroup.Framework.Service;
+using SystemGroup.Framework.StateManagement;
 
 namespace SystemGroup.Training.StoreManagement.Common
 {
     [Serializable]
-    [Master(typeof(IPartBusiness))]
+    [Master(typeof(IStoreKeeperBusiness))]
     [DataNature(DataNature.MasterData)]
     [SearchFields()]
-    partial class Part : Entity
+    partial class StoreKeeper : Entity
     {
         #region Methods
 
         public override string GetEntityName()
         {
-            return "Part_Part";
+            return "StoreKeeper_StoreKeeper"; 
         }
         public override void GetColumns(List<ColumnInfo> columns)
         {
             base.GetColumns(columns);
 
-            columns.Add(new TextColumnInfo("Code", "Part_Code"));
-            columns.Add(new TextColumnInfo("Title", "Part_Title"));
-            columns.Add(new ReferenceColumnInfo("UnitRef", "Part_UnitRef"));
+            columns.Add(new ReferenceColumnInfo("PartyRef", "_"));
         }
-
 
         #endregion
     }

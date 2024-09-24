@@ -14,23 +14,21 @@ using SystemGroup.Framework.StateManagement;
 namespace SystemGroup.Training.StoreManagement.Common
 {
     [Serializable]
-    [Master(typeof(IUnitBusiness))]
-    [DataNature(DataNature.MasterData)]
-    [SearchFields()]
-    partial class Unit : Entity
+    [DetailOf(typeof(Store), "StoreRef")]
+    partial class PartStore : Entity
     {
         #region Methods
 
         public override string GetEntityName()
         {
-            return "Unit_Unit";
+            return "PartStore_PartStore";
         }
         public override void GetColumns(List<ColumnInfo> columns)
         {
             base.GetColumns(columns);
 
-            columns.Add(new TextColumnInfo("Title","Unit_Title"));
-
+            columns.Add(new ReferenceColumnInfo("StoreRef", "PartStore_StoreRef"));
+            columns.Add(new ReferenceColumnInfo("PartRef", "PartStore_PartRef"));
         }
 
         #endregion

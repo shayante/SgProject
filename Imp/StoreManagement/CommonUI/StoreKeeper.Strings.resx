@@ -117,25 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InventoryVoucher" xml:space="preserve">
-    <value>سند انبار</value>
-  </data>
-  <data name="Number" xml:space="preserve">
-    <value>شماره</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>تاریخ</value>
-  </data>
-  <data name="StoreRef" xml:space="preserve">
-    <value>انبار</value>
-  </data>
-  <data name="StoreKeeperRef" xml:space="preserve">
+  <data name="StoreKeeper" xml:space="preserve">
     <value>انباردار</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>ورود/خروج</value>
-  </data>
-  <data name="State" xml:space="preserve">
-    <value>وضعیت</value>
   </data>
 </root>

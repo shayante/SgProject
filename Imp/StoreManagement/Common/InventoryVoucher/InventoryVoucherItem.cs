@@ -14,22 +14,24 @@ using SystemGroup.Framework.StateManagement;
 namespace SystemGroup.Training.StoreManagement.Common
 {
     [Serializable]
-    [Master(typeof(IUnitBusiness))]
+    [DetailOf(typeof(InventoryVoucher), "InventoryVoucherRef")]
     [DataNature(DataNature.MasterData)]
     [SearchFields()]
-    partial class Unit : Entity
+    partial class InventoryVoucherItem : Entity
     {
         #region Methods
 
         public override string GetEntityName()
         {
-            return "Unit_Unit";
+            return "InventoryVoucherItem_InventoryVoucherItem";
         }
         public override void GetColumns(List<ColumnInfo> columns)
         {
             base.GetColumns(columns);
 
-            columns.Add(new TextColumnInfo("Title","Unit_Title"));
+            columns.Add(new ReferenceColumnInfo("InventoryVoucherRef", "_"));
+            columns.Add(new ReferenceColumnInfo("PartRef", "_"));
+            columns.Add(new NumericColumnInfo("Quantity", "InventoryVoucherItem_Quantity",NumericType.FloatingPoint));
 
         }
 

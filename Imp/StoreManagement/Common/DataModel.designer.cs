@@ -321,7 +321,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InventoryVoucher_InventoryVoucherItem", Storage="_InventoryVoucher", ThisKey="InventoryVoucherRef", OtherKey="InventoryVoucherID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InventoryVoucher_InventoryVoucherItem", Storage="_InventoryVoucher", ThisKey="InventoryVoucherRef", OtherKey="ID", IsForeignKey=true)]
 		public InventoryVoucher InventoryVoucher
 		{
 			get
@@ -344,7 +344,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 					if ((value != null))
 					{
 						value.InventoryVoucherItems.Add(this);
-						this._InventoryVoucherRef = value.InventoryVoucherID;
+						this._InventoryVoucherRef = value.ID;
 					}
 					else
 					{
@@ -1323,19 +1323,19 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private long _InventoryVoucherID;
+		private long _ID;
 		
 		private string _Number;
 		
 		private System.DateTime _Date;
 		
-		private int _Type;
+		private InventoryVoucherType _Type;
 		
 		private long _StoreRef;
 		
 		private long _StoreKeeperRef;
 		
-		private int _State;
+		private InventoryVoucherState _State;
 		
 		private System.Data.Linq.Binary _Version;
 		
@@ -1357,19 +1357,19 @@ namespace SystemGroup.Training.StoreManagement.Common
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnInventoryVoucherIDChanging(long value);
-    partial void OnInventoryVoucherIDChanged();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
     partial void OnNumberChanging(string value);
     partial void OnNumberChanged();
     partial void OnDateChanging(System.DateTime value);
     partial void OnDateChanged();
-    partial void OnTypeChanging(int value);
+    partial void OnTypeChanging(InventoryVoucherType value);
     partial void OnTypeChanged();
     partial void OnStoreRefChanging(long value);
     partial void OnStoreRefChanged();
     partial void OnStoreKeeperRefChanging(long value);
     partial void OnStoreKeeperRefChanged();
-    partial void OnStateChanging(int value);
+    partial void OnStateChanging(InventoryVoucherState value);
     partial void OnStateChanged();
     partial void OnVersionChanging(System.Data.Linq.Binary value);
     partial void OnVersionChanged();
@@ -1391,22 +1391,22 @@ namespace SystemGroup.Training.StoreManagement.Common
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InventoryVoucherID", DbType="BigInt NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-		public long InventoryVoucherID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="InventoryVoucherID", Storage="_ID", DbType="BigInt NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public override long ID
 		{
 			get
 			{
-				return this._InventoryVoucherID;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._InventoryVoucherID != value))
+				if ((this._ID != value))
 				{
-					this.OnInventoryVoucherIDChanging(value);
+					this.OnIDChanging(value);
 					this.SendPropertyChanging();
-					this._InventoryVoucherID = value;
-					this.SendPropertyChanged("InventoryVoucherID");
-					this.OnInventoryVoucherIDChanged();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
@@ -1451,8 +1451,8 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int Type
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public InventoryVoucherType Type
 		{
 			get
 			{
@@ -1519,8 +1519,8 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int State
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="Int NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public InventoryVoucherState State
 		{
 			get
 			{
@@ -1639,7 +1639,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InventoryVoucher_InventoryVoucherItem", Storage="_InventoryVoucherItems", ThisKey="InventoryVoucherID", OtherKey="InventoryVoucherRef")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InventoryVoucher_InventoryVoucherItem", Storage="_InventoryVoucherItems", ThisKey="ID", OtherKey="InventoryVoucherRef")]
 		public EntitySet<InventoryVoucherItem> InventoryVoucherItems
 		{
 			get

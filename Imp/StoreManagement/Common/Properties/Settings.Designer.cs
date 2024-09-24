@@ -36,17 +36,6 @@ namespace SystemGroup.Training.StoreManagement.Common.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=GeneralDvp;User ID=sa;Password=123;Encrypt=True;Tru" +
-            "stServerCertificate=True")]
-        public string GeneralDvpConnectionString1 {
-            get {
-                return ((string)(this["GeneralDvpConnectionString1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=GeneralDvp;Integrated Security=True;Encrypt=False;T" +
             "rustServerCertificate=True")]
         public string GeneralDvpConnectionString2 {
