@@ -8,13 +8,14 @@ using SystemGroup.Framework.Common;
 using SystemGroup.Framework.Lookup;
 using SystemGroup.Framework.MetaData;
 using SystemGroup.Framework.MetaData.Mapping;
+using SystemGroup.Framework.Party;
 using SystemGroup.Framework.Service;
 using SystemGroup.Framework.StateManagement;
 
 namespace SystemGroup.Training.StoreManagement.Common
 {
     [Serializable]
-    [Master(typeof(IStoreKeeperBusiness))]
+    [DetailOf(typeof(IParty),"PartyRef")]
     [DataNature(DataNature.MasterData)]
     [SearchFields()]
     partial class StoreKeeper : Entity

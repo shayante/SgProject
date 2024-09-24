@@ -1,12 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  	<PropertyGroup>
+	<PropertyGroup>
 		<RootNamespace>SystemGroup.Training.StoreManagement.Web</RootNamespace>
 		<AssemblyName>SystemGroup.Training.StoreManagement.Web</AssemblyName>
 		<TargetFramework>net481</TargetFramework>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>..\..\..\..\Bin\</OutputPath>
 	</PropertyGroup>
+
+
+	<ItemGroup>
+		<EmbeddedResource Include="StorePages\EditStore.cs" />
+		<EmbeddedResource Include="PartPages\EditPart.cs" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 		<Reference Include="System.Data.Linq">
@@ -15,7 +22,7 @@
 		<Reference Include="SystemGroup.Framework">
 			<HintPath>$(OutputPath)\SystemGroup.Framework.dll</HintPath>
 		</Reference>
-		<Reference Include="SystemGroup.General.StoreManagement.Common">
+		<Reference Include="SystemGroup.Training.StoreManagement.Common">
 			<HintPath>$(OutputPath)\SystemGroup.Training.StoreManagement.Common.dll</HintPath>
 		</Reference>
 		<Reference Include="SystemGroup.Web">
@@ -26,5 +33,19 @@
 			<HintPath>$(OutputPath)\Telerik.Web.UI.dll</HintPath>
 		</Reference>
 	</ItemGroup>
-	
+
+	<ItemGroup>
+		<Folder Include="InventoryVoucherPages\" />
+		<Folder Include="UnitPages\" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="System.ServiceModel" />
+		<Reference Include="System.ServiceModel.Web" />
+		<Reference Include="System.Web" />
+		<Reference Include="System.Web.Extensions" />
+	</ItemGroup>
+
+
 </Project>
