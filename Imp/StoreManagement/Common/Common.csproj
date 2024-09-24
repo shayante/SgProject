@@ -9,12 +9,44 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Reference Include="System.Data.DataSetExtensions" />
 		<Reference Include="System.Data.Linq">
 			<HintPath>$(OutputPath)\System.Data.Linq.dll</HintPath>
 		</Reference>
 		<Reference Include="SystemGroup.Framework">
 			<HintPath>$(OutputPath)\SystemGroup.Framework.dll</HintPath>
 		</Reference>
+		<Reference Include="SystemGroup.Framework.Concepts">
+		  <HintPath>..\..\..\..\Bin\SystemGroup.Framework.Concepts.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="DataModel.dbml">
+	    <Generator>SgLinqToSQLGenerator</Generator>
+	    <LastGenOutput>DataModel.designer.cs</LastGenOutput>
+	  </None>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Service Include="{3259aa49-8aa1-44d3-9025-a0b520596a8c}" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="DataModel.designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>DataModel.dbml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>
