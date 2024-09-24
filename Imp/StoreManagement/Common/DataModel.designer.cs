@@ -166,6 +166,8 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		private EntityRef<Store> _Store;
 		
+		private EntityRef<StoreKeeper> _StoreKeeper;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -178,8 +180,8 @@ namespace SystemGroup.Training.StoreManagement.Common
     partial void OnDateChanged();
     partial void OnStoreRefChanging(long value);
     partial void OnStoreRefChanged();
-    partial void OnPartyRefChanging(long value);
-    partial void OnPartyRefChanged();
+    partial void OnStoreKeeperRefChanging(long value);
+    partial void OnStoreKeeperRefChanged();
     partial void OnTypeChanging(int value);
     partial void OnTypeChanged();
     partial void OnStateChanging(int value);
@@ -192,6 +194,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 		{
 			this._InventoryVoucherItem = default(EntityRef<InventoryVoucherItem>);
 			this._Store = default(EntityRef<Store>);
+			this._StoreKeeper = default(EntityRef<StoreKeeper>);
 			OnCreated();
 		}
 		
@@ -275,8 +278,8 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartyRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public long PartyRef
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="StoreKeeper", Storage="_PartyRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long StoreKeeperRef
 		{
 			get
 			{
@@ -286,11 +289,11 @@ namespace SystemGroup.Training.StoreManagement.Common
 			{
 				if ((this._PartyRef != value))
 				{
-					this.OnPartyRefChanging(value);
+					this.OnStoreKeeperRefChanging(value);
 					this.SendPropertyChanging();
 					this._PartyRef = value;
-					this.SendPropertyChanged("PartyRef");
-					this.OnPartyRefChanged();
+					this.SendPropertyChanged("StoreKeeperRef");
+					this.OnStoreKeeperRefChanged();
 				}
 			}
 		}
@@ -414,6 +417,40 @@ namespace SystemGroup.Training.StoreManagement.Common
 						this._ID = default(long);
 					}
 					this.SendPropertyChanged("Store");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StoreKeeper_InventoryVoucher", Storage="_StoreKeeper", ThisKey="StoreKeeperRef", OtherKey="ID", IsForeignKey=true)]
+		public StoreKeeper StoreKeeper
+		{
+			get
+			{
+				return this._StoreKeeper.Entity;
+			}
+			set
+			{
+				StoreKeeper previousValue = this._StoreKeeper.Entity;
+				if (((previousValue != value) 
+							|| (this._StoreKeeper.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._StoreKeeper.Entity = null;
+						previousValue.InventoryVouchers.Remove(this);
+					}
+					this._StoreKeeper.Entity = value;
+					if ((value != null))
+					{
+						value.InventoryVouchers.Add(this);
+						this._PartyRef = value.ID;
+					}
+					else
+					{
+						this._PartyRef = default(long);
+					}
+					this.SendPropertyChanged("StoreKeeper");
 				}
 			}
 		}
@@ -1348,6 +1385,8 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		private System.Data.Linq.Binary _Version;
 		
+		private EntitySet<InventoryVoucher> _InventoryVouchers;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1362,6 +1401,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		public StoreKeeper()
 		{
+			this._InventoryVouchers = new EntitySet<InventoryVoucher>(new Action<InventoryVoucher>(this.attach_InventoryVouchers), new Action<InventoryVoucher>(this.detach_InventoryVouchers));
 			OnCreated();
 		}
 		
@@ -1425,6 +1465,19 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StoreKeeper_InventoryVoucher", Storage="_InventoryVouchers", ThisKey="ID", OtherKey="StoreKeeperRef")]
+		public EntitySet<InventoryVoucher> InventoryVouchers
+		{
+			get
+			{
+				return this._InventoryVouchers;
+			}
+			set
+			{
+				this._InventoryVouchers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1443,6 +1496,18 @@ namespace SystemGroup.Training.StoreManagement.Common
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_InventoryVouchers(InventoryVoucher entity)
+		{
+			this.SendPropertyChanging();
+			entity.StoreKeeper = this;
+		}
+		
+		private void detach_InventoryVouchers(InventoryVoucher entity)
+		{
+			this.SendPropertyChanging();
+			entity.StoreKeeper = null;
 		}
 	}
 	

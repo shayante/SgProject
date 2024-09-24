@@ -6,12 +6,13 @@
       <Column Name="Number" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="StoreRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="PartyRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="StoreKeeper" Member="StoreKeeperRef" Storage="_PartyRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucherItem" ThisKey="ID" OtherKey="ID" Type="InventoryVoucherItem" Cardinality="One" />
       <Association Name="Store_InventoryVoucher" Member="Store" ThisKey="ID" OtherKey="ID" Type="Store" IsForeignKey="true" />
+      <Association Name="StoreKeeper_InventoryVoucher" Member="StoreKeeper" ThisKey="StoreKeeperRef" OtherKey="ID" Type="StoreKeeper" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="TRN3.InventoryVoucherItem" Member="InventoryVoucherItems">
@@ -62,6 +63,7 @@
       <Column Name="StoreKeeperID" Member="ID" Modifier="Override" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="PartyRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="StoreKeeper_InventoryVoucher" Member="InventoryVouchers" ThisKey="ID" OtherKey="StoreKeeperRef" Type="InventoryVoucher" />
     </Type>
   </Table>
   <Table Name="TRN3.Unit" Member="Units">
