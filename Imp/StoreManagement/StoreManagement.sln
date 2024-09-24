@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{323E6C27-8DDC-4F5E-8ED0-2692EB58BE7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{323E6C27-8DDC-4F5E-8ED0-2692EB58BE7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{F0C78565-E554-47F1-ADA4-4272E8944143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{F0C78565-E554-47F1-ADA4-4272E8944143}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{23A8ED40-B3E3-4C74-B188-CEEF12665A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{23A8ED40-B3E3-4C74-B188-CEEF12665A41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonUI", "CommonUI\CommonUI.csproj", "{CBE7C560-A2D1-4A60-948F-1CB66B9935E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonUI", "CommonUI\CommonUI.csproj", "{CBE7C560-A2D1-4A60-948F-1CB66B9935E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
