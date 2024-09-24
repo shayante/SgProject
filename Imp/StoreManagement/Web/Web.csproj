@@ -15,7 +15,7 @@
 		<Reference Include="SystemGroup.Framework">
 			<HintPath>$(OutputPath)\SystemGroup.Framework.dll</HintPath>
 		</Reference>
-		<Reference Include="SystemGroup.General.FirstComponent.Common">
+		<Reference Include="SystemGroup.General.StoreManagement.Common">
 			<HintPath>$(OutputPath)\SystemGroup.Training.StoreManagement.Common.dll</HintPath>
 		</Reference>
 		<Reference Include="SystemGroup.Web">
