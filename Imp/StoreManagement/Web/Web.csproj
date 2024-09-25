@@ -8,10 +8,19 @@
 		<OutputPath>..\..\..\..\Bin\</OutputPath>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <None Remove="StorePages\Edit.js" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 		<EmbeddedResource Include="StorePages\EditStore.cs" />
 		<EmbeddedResource Include="PartPages\EditPart.cs" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <EmbeddedResource Include="StorePages\Edit.js" />
 	</ItemGroup>
 
 

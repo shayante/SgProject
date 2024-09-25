@@ -21,6 +21,16 @@ namespace SystemGroup.Training.StoreManagement.Common
     [SearchFields()]
     partial class PartStore : Entity
     {
+
+
+        #region Properties
+
+        public string PartCode { get; set; }
+        public string PartTitle { get; set; }
+        
+
+        #endregion
+
         #region Methods
 
         public override string GetEntityName()
@@ -35,6 +45,7 @@ namespace SystemGroup.Training.StoreManagement.Common
             columns.Add(new ReferenceColumnInfo("PartRef", "PartStore_PartRef"));
         }
 
+       
         #endregion
     }
 }

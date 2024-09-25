@@ -33,6 +33,9 @@
 	  <EmbeddedResource Update="Part.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
+	  <EmbeddedResource Update="PartStore.Strings.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Store.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
