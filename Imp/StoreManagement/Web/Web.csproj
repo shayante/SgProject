@@ -35,12 +35,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="InventoryVoucherPages\" />
-		<Folder Include="UnitPages\" />
-
-	</ItemGroup>
-
-	<ItemGroup>
 		<Reference Include="System.ServiceModel" />
 		<Reference Include="System.ServiceModel.Web" />
 		<Reference Include="System.Web" />

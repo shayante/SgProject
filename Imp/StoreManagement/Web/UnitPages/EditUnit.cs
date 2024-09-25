@@ -5,16 +5,16 @@ using SystemGroup.Web.UI.Pages.EditorPage;
 
 namespace SystemGroup.Training.StoreManagement.Web.UnitPages
 {
-    internal class EditUnit : SgEditorView<Unit>
+    public partial class EditUnit : SgEditorView<Unit>
     {
         protected override void OnCreateBindings(SgDataSourceEditorBindingContext<Unit> context)
         {
-            throw new NotImplementedException();
+            BindControls(context);
         }
 
         protected override void OnCreateViews()
         {
-            throw new NotImplementedException();
+           AddControls();
         }
     }
 }
