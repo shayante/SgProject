@@ -21,11 +21,19 @@ namespace SystemGroup.Training.StoreManagement.Common
 
         protected override void InitializeStates()
         {
-            var registered = new State(InventoryVoucherState.Registered,"InventortyVoucher_registered");
-            var confirmed = new State(InventoryVoucherState.Confirmed, "InventortyVoucher_confirmed");
-            var invalidated = new State(InventoryVoucherState.Invalidated, "InventortyVoucher_invalidated");
+            var registered = new State(InventoryVoucherState.Registered,"InventoryVoucher_registered".GetKey());
+            var confirmed = new State(InventoryVoucherState.Confirmed, "InventoryVoucher_confirmed".GetKey());
+            var invalidated = new State(InventoryVoucherState.Invalidated, "InventoryVoucher_invalidated".GetKey());
 
-            InitialState = registered;  
+            States.Add(registered);
+            States.Add(confirmed);
+            States.Add(invalidated);
+
+            InitialState = registered;
+
+            Transitions.Add(new ManualTransition(registered, confirmed, "Labels_ConfirmVoucher".GetKey(), securityKey: "Confirm"));
+            Transitions.Add(new ManualTransition(registered, invalidated, "Labels_InvalidateVoucher".GetKey(), securityKey: "Invalidate"));
+
         }
     }
 }

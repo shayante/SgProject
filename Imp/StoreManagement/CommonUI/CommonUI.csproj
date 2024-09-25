@@ -24,6 +24,9 @@
 	  <EmbeddedResource Update="Links.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
+	  <EmbeddedResource Update="LogicalResources.Strings.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Messages.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>

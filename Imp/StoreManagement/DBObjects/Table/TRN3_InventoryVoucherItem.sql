@@ -56,7 +56,7 @@ REFERENCES [TRN3].[InventoryVoucher] ([InventoryVoucherID])
 
 GO
 If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucherItem_PartRef')
-ALTER TABLE [TRN3].[InventoryVoucherItem]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucherItem_PartRef] FOREIGN KEY([InventoryVoucherItemID])
+ALTER TABLE [TRN3].[InventoryVoucherItem]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucherItem_PartRef] FOREIGN KEY([PartRef])
 REFERENCES [TRN3].[Part] ([PartID])
 
 GO

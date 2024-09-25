@@ -138,4 +138,13 @@
   <data name="State" xml:space="preserve">
     <value>وضعیت</value>
   </data>
+  <data name="registered" xml:space="preserve">
+    <value>ثبت شده</value>
+  </data>
+  <data name="confirmed" xml:space="preserve">
+    <value>تأیید شده</value>
+  </data>
+  <data name="invalidated" xml:space="preserve">
+    <value>باطل شده</value>
+  </data>
 </root>

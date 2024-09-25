@@ -40,8 +40,6 @@ GO
 --<< INDEXES DEFINITION >>--
 
 If not Exists (select 1 from sys.indexes where name = 'IX_TRN3_Store_Code')
-
-
 ALTER TABLE [TRN3].[Store] ADD  CONSTRAINT [IX_TRN3_Store_Code] UNIQUE NONCLUSTERED 
 (
 	[Code] ASC
@@ -49,8 +47,6 @@ ALTER TABLE [TRN3].[Store] ADD  CONSTRAINT [IX_TRN3_Store_Code] UNIQUE NONCLUSTE
 
 GO
 If not Exists (select 1 from sys.indexes where name = 'IX_TRN3_Store_Name')
-
-
 ALTER TABLE [TRN3].[Store] ADD  CONSTRAINT [IX_TRN3_Store_Name] UNIQUE NONCLUSTERED 
 (
 	[Name] ASC

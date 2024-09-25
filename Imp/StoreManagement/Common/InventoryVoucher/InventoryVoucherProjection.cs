@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SystemGroup.Framework.Common;
+using SystemGroup.Framework.Party;
+using SystemGroup.Framework.Service;
 
 namespace SystemGroup.Training.StoreManagement.Common
 {
@@ -13,10 +15,27 @@ namespace SystemGroup.Training.StoreManagement.Common
 
         public override IQueryable Project(IQueryable<InventoryVoucher> inputs)
         {
-            
-            return from input in inputs
+            var sotreBiz = ServiceFactory.Create<IStoreBusiness>();
+            var sotreKeeperBiz = ServiceFactory.Create<IStoreKeeperBusiness>();
+            var partyBiz = ServiceFactory.Create<IPartyService>();
 
-                   select input;
+            return from iv in inputs
+                   join store in sotreBiz.FetchAll()
+                   on iv.StoreRef equals store.ID
+                   join sk in sotreKeeperBiz.FetchAll() on iv.StoreRef equals sk.ID
+                   join party in partyBiz.FetchAllParties() on sk.PartyRef equals party.ID
+                   select new
+                   {
+                       iv.ID,
+                       iv.Number,
+                       iv.Date,
+                       iv.Type,
+                       iv.State,
+                       iv.StoreRef,
+                       iv.StoreKeeperRef,
+                       StoreName = store.Name,
+                       StoreKeeper = party.FullName
+                   };
 
         }
         public override void GetColumns(List<ColumnInfo> columns)
@@ -26,10 +45,10 @@ namespace SystemGroup.Training.StoreManagement.Common
 
             columns.Add(new EntityColumnInfo<InventoryVoucher>("Number"));
             columns.Add(new EntityColumnInfo<InventoryVoucher>("Date"));
-            //columns.Add(new TextColumnInfo("Type", "InventoryVoucher_Type"));//TODO add lookup
-            //columns.Add(new DateTimeColumnInfo("State", "InventoryVoucher_State"));//TODO add lookup
-            //columns.Add(new TextColumnInfo("StoreName", "InventoryVoucher_StoreRef"));//TODO add after join
-            //columns.Add(new TextColumnInfo("StoreKeeper", "InventoryVoucher_StoreKeeperRef"));//TODO add after join
+            columns.Add(new EntityColumnInfo<InventoryVoucher>("Type"));
+            columns.Add(new EntityColumnInfo<InventoryVoucher>("State"));
+            columns.Add(new TextColumnInfo("StoreName", "InventoryVoucher_StoreRef"));
+            columns.Add(new TextColumnInfo("StoreKeeper", "InventoryVoucher_StoreKeeperRef"));
         }
 
         #endregion

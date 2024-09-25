@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SystemGroup.Framework.Common;
+using SystemGroup.Framework.Service;
 
 namespace SystemGroup.Training.StoreManagement.Common
 {
@@ -13,15 +14,26 @@ namespace SystemGroup.Training.StoreManagement.Common
 
         public override IQueryable Project(IQueryable<Part> inputs)
         {
-            return from input in inputs
-                   select input;
+            var units = ServiceFactory.Create<IUnitBusiness>().FetchAll();
+            return from part in inputs
+                   join unit in units on part.UnitRef equals unit.ID
+                   select new
+                   {
+                       part.ID,
+                       part.Code,
+                       part.Title,
+                       part.UnitRef,
+                       Unit = unit.Title
+                   };
 
         }
         public override void GetColumns(List<ColumnInfo> columns)
         {
             base.GetColumns(columns);
 
-            //columns.Add(new TextColumnInfo("Field1", "Part_Field1"));
+            columns.Add(new EntityColumnInfo<Part>("Code"));
+            columns.Add(new EntityColumnInfo<Part>("Title"));
+            columns.Add(new TextColumnInfo("Unit", "Part_UnitRef"));
         }
 
         #endregion

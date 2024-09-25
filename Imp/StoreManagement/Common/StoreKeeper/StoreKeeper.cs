@@ -15,7 +15,7 @@ using SystemGroup.Framework.StateManagement;
 namespace SystemGroup.Training.StoreManagement.Common
 {
     [Serializable]
-    [DetailOf(typeof(IParty),"PartyRef")]
+    [Master(typeof(IStoreKeeperBusiness))]
     [DataNature(DataNature.MasterData)]
     [SearchFields()]
     partial class StoreKeeper : Entity

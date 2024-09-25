@@ -3,7 +3,7 @@
 
 If Object_ID('TRN3.StoreKeeper') Is Null
 CREATE TABLE [TRN3].[StoreKeeper](
-	[StoreKeeper] [bigint] NOT NULL,
+	[StoreKeeperID] [bigint] NOT NULL,
 	[PartyRef] [bigint] NOT NULL,
 	[Version] [timestamp] NOT NULL
 ) ON [PRIMARY]
@@ -28,7 +28,7 @@ GO*/
 If not Exists (select 1 from sys.objects where name = 'PK_TRN3_StoreKeeper')
 ALTER TABLE [TRN3].[StoreKeeper] ADD  CONSTRAINT [PK_TRN3_StoreKeeper] PRIMARY KEY CLUSTERED 
 (
-	[StoreKeeper] ASC
+	[StoreKeeperID] ASC
 ) ON [PRIMARY]
 GO
 
@@ -48,7 +48,7 @@ GO
 --<< FOREIGNKEYS DEFINITION >>--
 
 If not Exists (select 1 from sys.objects where name = 'FK_TRN3_StoreKeeper_PartyRef')
-ALTER TABLE [TRN3].[StoreKeeper]  ADD  CONSTRAINT [FK_TRN3_StoreKeeper_PartyRef] FOREIGN KEY([StoreKeeper])
+ALTER TABLE [TRN3].[StoreKeeper]  ADD  CONSTRAINT [FK_TRN3_StoreKeeper_PartyRef] FOREIGN KEY([PartyRef])
 REFERENCES [GNR3].[Party] ([PartyID])
 
 GO

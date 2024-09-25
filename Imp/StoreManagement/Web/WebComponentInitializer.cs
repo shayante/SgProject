@@ -24,7 +24,7 @@ namespace SystemGroup.Training.StoreManagement.Web
         #region Statics
         private static IUnitBusiness UnitBiz => ServiceFactory.Create<IUnitBusiness>();
         private static IPartBusiness PartBiz => ServiceFactory.Create<IPartBusiness>();
-        private static IStoreBusiness StoreBiz => ServiceFactory.Create<IStoreBusiness>();
+        private static IStoreKeeperBusiness StoreBiz => ServiceFactory.Create<IStoreKeeperBusiness>();
         private static IInventoryVoucherBusiness InventoryVoucherBiz => ServiceFactory.Create<IInventoryVoucherBusiness>();
         #endregion
 
@@ -33,13 +33,13 @@ namespace SystemGroup.Training.StoreManagement.Web
         #region Unit
 
 
-        [AddNewEntityAction(typeof(Unit))]
+        [AddNewEntityAction(typeof(Unit),SecurityKey = "Training.StoreManagement.Unit.New")]
         public void NewUnit()
         {
             SgShell.Show<EditUnit>();
         }
 
-        [ViewDetailEntityAction(typeof(Unit))]
+        [ViewDetailEntityAction(typeof(Unit), SecurityKey = "Training.StoreManagement.Unit.Edit")]
         public void EditUnit(long[] ids)
         {
             foreach (var id in ids)
@@ -49,7 +49,7 @@ namespace SystemGroup.Training.StoreManagement.Web
         }
 
 
-        [DeleteEntityAction(typeof(Unit))]
+        [DeleteEntityAction(typeof(Unit), SecurityKey = "Training.StoreManagement.Unit.Delete")]
         public void DeleteUnit(long[] ids)
         {
             if (ids != null && ids.Length > 0)
@@ -64,13 +64,13 @@ namespace SystemGroup.Training.StoreManagement.Web
         #region Part
 
 
-        [AddNewEntityAction(typeof(Part))]
+        [AddNewEntityAction(typeof(Part), SecurityKey = "Training.StoreManagement.Part.New")]
         public void NewPart()
         {
             SgShell.Show<EditPart>();
         }
 
-        [ViewDetailEntityAction(typeof(Part))]
+        [ViewDetailEntityAction(typeof(Part), SecurityKey = "Training.StoreManagement.Part.Edit")]
         public void EditPart(long[] ids)
         {
             foreach (var id in ids)
@@ -80,7 +80,7 @@ namespace SystemGroup.Training.StoreManagement.Web
         }
 
 
-        [DeleteEntityAction(typeof(Part))]
+        [DeleteEntityAction(typeof(Part), SecurityKey = "Training.StoreManagement.Part.Delete")]
         public void DeletePart(long[] ids)
         {
             if (ids != null && ids.Length > 0)
@@ -94,13 +94,13 @@ namespace SystemGroup.Training.StoreManagement.Web
         #region Store
 
 
-        [AddNewEntityAction(typeof(Store))]
+        [AddNewEntityAction(typeof(Store), SecurityKey = "Training.StoreManagement.Store.New")]
         public void NewStore()
         {
             SgShell.Show<EditStore>();
         }
 
-        [ViewDetailEntityAction(typeof(Store))]
+        [ViewDetailEntityAction(typeof(Store), SecurityKey = "Training.StoreManagement.Store.Edit")]
         public void EditStore(long[] ids)
         {
             foreach (var id in ids)
@@ -110,7 +110,7 @@ namespace SystemGroup.Training.StoreManagement.Web
         }
 
 
-        [DeleteEntityAction(typeof(Store))]
+        [DeleteEntityAction(typeof(Store), SecurityKey = "Training.StoreManagement.Store.Delete")]
         public void DeleteStore(long[] ids)
         {
             if (ids != null && ids.Length > 0)
@@ -125,13 +125,13 @@ namespace SystemGroup.Training.StoreManagement.Web
         #region InventoryVoucher
 
 
-        [AddNewEntityAction(typeof(InventoryVoucher))]
+        [AddNewEntityAction(typeof(InventoryVoucher), SecurityKey = "Training.StoreManagement.InventoryVoucher.New")]
         public void NewInventoryVoucher()
         {
             SgShell.Show<EditInventoryVoucher>();
         }
 
-        [ViewDetailEntityAction(typeof(InventoryVoucher))]
+        [ViewDetailEntityAction(typeof(InventoryVoucher), SecurityKey = "Training.StoreManagement.InventoryVoucher.Edit")]
         public void EditInventoryVoucher(long[] ids)
         {
             foreach (var id in ids)
@@ -141,7 +141,7 @@ namespace SystemGroup.Training.StoreManagement.Web
         }
 
 
-        [DeleteEntityAction(typeof(InventoryVoucher))]
+        [DeleteEntityAction(typeof(InventoryVoucher), SecurityKey = "Training.StoreManagement.InventoryVoucher.Delete")]
         public void DeleteInventoryVoucher(long[] ids)
         {
             if (ids != null && ids.Length > 0)
@@ -160,19 +160,19 @@ namespace SystemGroup.Training.StoreManagement.Web
         {
             return new List<ComponentLink>
             {
-                new ComponentLink("Training", "Labels_Training", null, null, 0, new ComponentLink[] {
+                new ComponentLink("Training", "Labels_Training".GetKey(), null, null, 0, new ComponentLink[] {
                     new ComponentLink("Lists", "s:Labels_Lists", null, null, 1, new ComponentLink[] {
 
-                        new ComponentLink("InventoryVoucherList","InventoryVoucher_InventoryVoucher",null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=InventoryVoucher",1),
-                        new ComponentLink("StoreList","Store_Store",null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Store",2),
-                        new ComponentLink("PartList","Part_Part",null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Part",3),
-                        new ComponentLink("UnitList","Unit_Unit",null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Unit",4),
+                        new ComponentLink("InventoryVoucherList","InventoryVoucher_InventoryVoucher".GetKey(),null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=InventoryVoucher",1),
+                        new ComponentLink("StoreList","Store_Store".GetKey(),null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Store",2),
+                        new ComponentLink("PartList","Part_Part".GetKey(),null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Part",3),
+                        new ComponentLink("UnitList","Unit_Unit".GetKey(),null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Unit",4),
                     
                     }),
-                    new ComponentLink("AddInventoryVoucher", "Links_AddInventoryVoucher", null, typeof(EditInventoryVoucher), 1),
-                    new ComponentLink("AddStore", "Links_AddStore", null, typeof(EditStore), 2),
-                    new ComponentLink("AddPart", "Links_AddPart", null, typeof(EditPart), 3),
-                    new ComponentLink("AddUnit", "Links_AddUnit", null, typeof(EditUnit), 4),
+                    new ComponentLink("AddInventoryVoucher", "Labels_AddInventoryVoucher".GetKey(), null,SecurityKey.Of("Training.StoreManagement.InventoryVoucher.New"), typeof(EditInventoryVoucher), 1),
+                    new ComponentLink("AddStore", "Labels_AddStore".GetKey(), null,SecurityKey.Of("Training.StoreManagement.Store.New"), typeof(EditStore), 2),
+                    new ComponentLink("AddPart", "Labels_AddPart".GetKey(), null,SecurityKey.Of("Training.StoreManagement.Part.New"), typeof(EditPart), 3),
+                    new ComponentLink("AddUnit", "Labels_AddUnit".GetKey(), null,SecurityKey.Of("Training.StoreManagement.Unit.New"), typeof(EditUnit), 4),
                 })
             };
         }

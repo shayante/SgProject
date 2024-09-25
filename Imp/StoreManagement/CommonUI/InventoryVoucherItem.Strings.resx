@@ -120,4 +120,7 @@
   <data name="InventoryVoucherItem" xml:space="preserve">
     <value>قلم سند انبار</value>
   </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>مقدار</value>
+  </data>
 </root>

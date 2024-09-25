@@ -15,6 +15,10 @@ namespace SystemGroup.Training.StoreManagement.Common
 {
     [Serializable]
     [DetailOf(typeof(Store), "StoreRef")]
+    [AssociatedWith(typeof(Part), "PartRef", AssociationType.ManyToOne)]
+    [AssociatedWith(typeof(Store), "StoreRef", AssociationType.ManyToOne)]
+    [DataNature(DataNature.MasterData)]
+    [SearchFields()]
     partial class PartStore : Entity
     {
         #region Methods
