@@ -1,0 +1,1 @@
+﻿exec sys3.CreateNumberingMethod N'سند انبار','SystemGroup.General.StoreManagement','InventoryVoucher'

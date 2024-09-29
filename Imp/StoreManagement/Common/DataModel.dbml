@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GeneralDvp" Class="DataModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=GeneralDvp;Integrated Security=True;Encrypt=False;Trust Server Certificate=True" SettingsObjectName="SystemGroup.Training.StoreManagement.Common.Properties.Settings" SettingsPropertyName="GeneralDvpConnectionString2" Provider="System.Data.SqlClient" />
-  <Table Name="TRN3.InventoryVoucher" Member="InventoryVouchers">
-    <Type Name="InventoryVoucher">
-      <Column Name="InventoryVoucherID" Member="ID" Modifier="Override" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Number" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="StoreRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="PartyRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+  <Table Name="TRN3.Part" Member="Parts">
+    <Type Name="Part">
+      <Column Name="PartID" Member="ID" Modifier="Override" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucherItem" ThisKey="ID" OtherKey="ID" Type="InventoryVoucherItem" Cardinality="One" />
-      <Association Name="Store_InventoryVoucher" Member="Store" ThisKey="ID" OtherKey="ID" Type="Store" IsForeignKey="true" />
+      <Association Name="Part_InventoryVoucherItem" Member="InventoryVoucherItems" ThisKey="ID" OtherKey="PartRef" Type="InventoryVoucherItem" />
+      <Association Name="Part_PartStore" Member="PartStores" ThisKey="ID" OtherKey="PartRef" Type="PartStore" />
+      <Association Name="Unit_Part" Member="Unit" ThisKey="UnitRef" OtherKey="ID" Type="Unit" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="TRN3.InventoryVoucherItem" Member="InventoryVoucherItems">
@@ -21,20 +19,27 @@
       <Column Name="PartRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(28,6) NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucher" ThisKey="ID" OtherKey="ID" Type="InventoryVoucher" IsForeignKey="true" />
-      <Association Name="Part_InventoryVoucherItem" Member="Part" ThisKey="ID" OtherKey="ID" Type="Part" IsForeignKey="true" />
+      <Association Name="Part_InventoryVoucherItem" Member="Part" ThisKey="PartRef" OtherKey="ID" Type="Part" IsForeignKey="true" />
+      <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucher" ThisKey="InventoryVoucherRef" OtherKey="ID" Type="InventoryVoucher" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="TRN3.Part" Member="Parts">
-    <Type Name="Part">
-      <Column Name="PartID" Member="ID" Modifier="Override" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Code" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="UnitRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+  <Table Name="TRN3.InventoryVoucher" Member="InventoryVouchers">
+    <Type Name="InventoryVoucher">
+      <Column Name="InventoryVoucherID" Member="ID" Modifier="Override" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="InventoryVoucherType" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StoreRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="StoreKeeperRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="InventoryVoucherState" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Association Name="Part_InventoryVoucherItem" Member="InventoryVoucherItem" ThisKey="ID" OtherKey="ID" Type="InventoryVoucherItem" Cardinality="One" />
-      <Association Name="Part_PartStore" Member="PartStore" ThisKey="ID" OtherKey="ID" Type="PartStore" Cardinality="One" />
-      <Association Name="Unit_Part" Member="Unit" ThisKey="ID" OtherKey="ID" Type="Unit" IsForeignKey="true" />
+      <Column Name="Creator" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="LastModifier" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastModificationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="InventoryVoucher_InventoryVoucherItem" Member="InventoryVoucherItems" ThisKey="ID" OtherKey="InventoryVoucherRef" Type="InventoryVoucherItem" />
+      <Association Name="Store_InventoryVoucher" Member="Store" ThisKey="StoreRef" OtherKey="ID" Type="Store" IsForeignKey="true" />
+      <Association Name="StoreKeeper_InventoryVoucher" Member="StoreKeeper" ThisKey="StoreKeeperRef" OtherKey="ID" Type="StoreKeeper" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="TRN3.PartStore" Member="PartStores">
@@ -43,8 +48,8 @@
       <Column Name="PartRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="StoreRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Association Name="Part_PartStore" Member="Part" ThisKey="ID" OtherKey="ID" Type="Part" IsForeignKey="true" />
-      <Association Name="Store_PartStore" Member="Store" ThisKey="ID" OtherKey="ID" Type="Store" IsForeignKey="true" />
+      <Association Name="Part_PartStore" Member="Part" ThisKey="PartRef" OtherKey="ID" Type="Part" IsForeignKey="true" />
+      <Association Name="Store_PartStore" Member="Store" ThisKey="StoreRef" OtherKey="ID" Type="Store" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="TRN3.Store" Member="Stores">
@@ -53,8 +58,8 @@
       <Column Name="Code" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Association Name="Store_InventoryVoucher" Member="InventoryVoucher" ThisKey="ID" OtherKey="ID" Type="InventoryVoucher" Cardinality="One" />
-      <Association Name="Store_PartStore" Member="PartStore" ThisKey="ID" OtherKey="ID" Type="PartStore" Cardinality="One" />
+      <Association Name="Store_InventoryVoucher" Member="InventoryVouchers" ThisKey="ID" OtherKey="StoreRef" Type="InventoryVoucher" />
+      <Association Name="Store_PartStore" Member="PartStores" ThisKey="ID" OtherKey="StoreRef" Type="PartStore" />
     </Type>
   </Table>
   <Table Name="TRN3.StoreKeeper" Member="StoreKeepers">
@@ -62,6 +67,7 @@
       <Column Name="StoreKeeperID" Member="ID" Modifier="Override" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="PartyRef" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="StoreKeeper_InventoryVoucher" Member="InventoryVouchers" ThisKey="ID" OtherKey="StoreKeeperRef" Type="InventoryVoucher" />
     </Type>
   </Table>
   <Table Name="TRN3.Unit" Member="Units">
@@ -69,7 +75,7 @@
       <Column Name="UnitID" Member="ID" Modifier="Override" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Association Name="Unit_Part" Member="Part" ThisKey="ID" OtherKey="ID" Type="Part" Cardinality="One" />
+      <Association Name="Unit_Part" Member="Parts" ThisKey="ID" OtherKey="UnitRef" Type="Part" />
     </Type>
   </Table>
 </Database>

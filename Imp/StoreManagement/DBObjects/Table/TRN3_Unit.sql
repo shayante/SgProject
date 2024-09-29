@@ -39,8 +39,6 @@ GO
 --<< INDEXES DEFINITION >>--
 
 If not Exists (select 1 from sys.indexes where name = 'IX_TRN3_Unit_Title')
-
-
 ALTER TABLE [TRN3].[Unit] ADD  CONSTRAINT [IX_TRN3_Unit_Title] UNIQUE NONCLUSTERED 
 (
 	[Title] ASC

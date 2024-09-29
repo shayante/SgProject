@@ -8,9 +8,13 @@ CREATE TABLE [TRN3].[InventoryVoucher](
 	[Date] [datetime] NOT NULL,
 	[Type] [int] NOT NULL,
 	[StoreRef] [bigint] NOT NULL,
-	[PartyRef] [bigint] NOT NULL,
+	[StoreKeeperRef] [bigint] NOT NULL,
 	[State] [int] NOT NULL,
-	[Version] [timestamp] NOT NULL
+	[Version] [timestamp] NOT NULL,
+	[Creator] [bigint] NOT NULL,
+	[LastModifier] [bigint] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[LastModificationDate] [datetime] NOT NULL
 ) ON [PRIMARY]
 
 --TEXTIMAGE_ON [SG_LOBData]
@@ -43,23 +47,25 @@ GO
 
 --<< INDEXES DEFINITION >>--
 
-If not Exists (select 1 from sys.indexes where name = 'IX_TRN3_InventoryVoucher_Number')
-
-CREATE UNIQUE NONCLUSTERED INDEX [IX_TRN3_InventoryVoucher_Number] ON [TRN3].[InventoryVoucher]
-(
-	[Number] ASC
-) ON [PRIMARY]
-
-GO
 --<< FOREIGNKEYS DEFINITION >>--
 
-If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucher_PartyRef')
-ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_PartyRef] FOREIGN KEY([PartyRef])
-REFERENCES [GNR3].[Party] ([PartyID])
+If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucher_Creator')
+ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_Creator] FOREIGN KEY([InventoryVoucherID])
+REFERENCES [SYS3].[User] ([UserID])
+
+GO
+If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucher_LastModifier')
+ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_LastModifier] FOREIGN KEY([InventoryVoucherID])
+REFERENCES [SYS3].[User] ([UserID])
+
+GO
+If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucher_StoreKeeperRef')
+ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_StoreKeeperRef] FOREIGN KEY([StoreKeeperRef])
+REFERENCES [TRN3].[StoreKeeper] ([StoreKeeperID])
 
 GO
 If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucher_StoreRef')
-ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_StoreRef] FOREIGN KEY([InventoryVoucherID])
+ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_StoreRef] FOREIGN KEY([StoreRef])
 REFERENCES [TRN3].[Store] ([StoreID])
 
 GO

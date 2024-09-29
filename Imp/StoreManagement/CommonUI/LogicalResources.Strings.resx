@@ -117,13 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Training" xml:space="preserve">
+    <value>تست</value>
+  </data>
+  <data name="StoreManagement" xml:space="preserve">
+    <value>مدیریت انبار</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>واحد سنجش</value>
+  </data>
+  <data name="Part" xml:space="preserve">
+    <value>کالا</value>
+  </data>
   <data name="Store" xml:space="preserve">
     <value>انبار</value>
   </data>
-  <data name="Code" xml:space="preserve">
-    <value>کد</value>
+  <data name="New" xml:space="preserve">
+    <value>جدید</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>نام انبار</value>
+  <data name="Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="InventoryVoucher" xml:space="preserve">
+    <value>سند انبار</value>
   </data>
 </root>

@@ -10,9 +10,9 @@ using SystemGroup.Framework.Service;
 namespace SystemGroup.Training.StoreManagement.Common
 {
     [ServiceInterface]
-    public interface IUnitBusiness : IBusinessBase<Unit>
+    public interface IStoreBusiness : IBusinessBase<Store>
     {
-        [EntityView("AllUnits", "Views_AllUnits", typeof(UnitProjection), "Title", IsDefaultView = true)]
-        new IQueryable<Unit> FetchAll();
+        [EntityView("AllStores", "Views_AllStores", typeof(StoreProjection), "Name", IsDefaultView = true)]
+        new IQueryable<Store> FetchAll();
     }
 }

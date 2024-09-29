@@ -30,15 +30,15 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertInventoryVoucher(InventoryVoucher instance);
-    partial void UpdateInventoryVoucher(InventoryVoucher instance);
-    partial void DeleteInventoryVoucher(InventoryVoucher instance);
-    partial void InsertInventoryVoucherItem(InventoryVoucherItem instance);
-    partial void UpdateInventoryVoucherItem(InventoryVoucherItem instance);
-    partial void DeleteInventoryVoucherItem(InventoryVoucherItem instance);
     partial void InsertPart(Part instance);
     partial void UpdatePart(Part instance);
     partial void DeletePart(Part instance);
+    partial void InsertInventoryVoucherItem(InventoryVoucherItem instance);
+    partial void UpdateInventoryVoucherItem(InventoryVoucherItem instance);
+    partial void DeleteInventoryVoucherItem(InventoryVoucherItem instance);
+    partial void InsertInventoryVoucher(InventoryVoucher instance);
+    partial void UpdateInventoryVoucher(InventoryVoucher instance);
+    partial void DeleteInventoryVoucher(InventoryVoucher instance);
     partial void InsertPartStore(PartStore instance);
     partial void UpdatePartStore(PartStore instance);
     partial void DeletePartStore(PartStore instance);
@@ -83,11 +83,11 @@ namespace SystemGroup.Training.StoreManagement.Common
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<InventoryVoucher> InventoryVouchers
+		public System.Data.Linq.Table<Part> Parts
 		{
 			get
 			{
-				return this.GetTable<InventoryVoucher>();
+				return this.GetTable<Part>();
 			}
 		}
 		
@@ -99,11 +99,11 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		public System.Data.Linq.Table<Part> Parts
+		public System.Data.Linq.Table<InventoryVoucher> InventoryVouchers
 		{
 			get
 			{
-				return this.GetTable<Part>();
+				return this.GetTable<InventoryVoucher>();
 			}
 		}
 		
@@ -140,537 +140,6 @@ namespace SystemGroup.Training.StoreManagement.Common
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="TRN3.InventoryVoucher")]
-	public partial class InventoryVoucher : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _ID;
-		
-		private string _Number;
-		
-		private System.DateTime _Date;
-		
-		private long _StoreRef;
-		
-		private long _PartyRef;
-		
-		private int _Type;
-		
-		private int _State;
-		
-		private System.Data.Linq.Binary _Version;
-		
-		private EntityRef<InventoryVoucherItem> _InventoryVoucherItem;
-		
-		private EntityRef<Store> _Store;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(long value);
-    partial void OnIDChanged();
-    partial void OnNumberChanging(string value);
-    partial void OnNumberChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnStoreRefChanging(long value);
-    partial void OnStoreRefChanged();
-    partial void OnPartyRefChanging(long value);
-    partial void OnPartyRefChanged();
-    partial void OnTypeChanging(int value);
-    partial void OnTypeChanged();
-    partial void OnStateChanging(int value);
-    partial void OnStateChanged();
-    partial void OnVersionChanging(System.Data.Linq.Binary value);
-    partial void OnVersionChanged();
-    #endregion
-		
-		public InventoryVoucher()
-		{
-			this._InventoryVoucherItem = default(EntityRef<InventoryVoucherItem>);
-			this._Store = default(EntityRef<Store>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="InventoryVoucherID", Storage="_ID", DbType="BigInt NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-		public override long ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Number", DbType="NVarChar(250) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Number
-		{
-			get
-			{
-				return this._Number;
-			}
-			set
-			{
-				if ((this._Number != value))
-				{
-					this.OnNumberChanging(value);
-					this.SendPropertyChanging();
-					this._Number = value;
-					this.SendPropertyChanged("Number");
-					this.OnNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoreRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public long StoreRef
-		{
-			get
-			{
-				return this._StoreRef;
-			}
-			set
-			{
-				if ((this._StoreRef != value))
-				{
-					this.OnStoreRefChanging(value);
-					this.SendPropertyChanging();
-					this._StoreRef = value;
-					this.SendPropertyChanged("StoreRef");
-					this.OnStoreRefChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartyRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public long PartyRef
-		{
-			get
-			{
-				return this._PartyRef;
-			}
-			set
-			{
-				if ((this._PartyRef != value))
-				{
-					this.OnPartyRefChanging(value);
-					this.SendPropertyChanging();
-					this._PartyRef = value;
-					this.SendPropertyChanged("PartyRef");
-					this.OnPartyRefChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int State
-		{
-			get
-			{
-				return this._State;
-			}
-			set
-			{
-				if ((this._State != value))
-				{
-					this.OnStateChanging(value);
-					this.SendPropertyChanging();
-					this._State = value;
-					this.SendPropertyChanged("State");
-					this.OnStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Version
-		{
-			get
-			{
-				return this._Version;
-			}
-			set
-			{
-				if ((this._Version != value))
-				{
-					this.OnVersionChanging(value);
-					this.SendPropertyChanging();
-					this._Version = value;
-					this.SendPropertyChanged("Version");
-					this.OnVersionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InventoryVoucher_InventoryVoucherItem", Storage="_InventoryVoucherItem", ThisKey="ID", OtherKey="ID", IsUnique=true, IsForeignKey=false)]
-		public InventoryVoucherItem InventoryVoucherItem
-		{
-			get
-			{
-				return this._InventoryVoucherItem.Entity;
-			}
-			set
-			{
-				InventoryVoucherItem previousValue = this._InventoryVoucherItem.Entity;
-				if (((previousValue != value) 
-							|| (this._InventoryVoucherItem.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InventoryVoucherItem.Entity = null;
-						previousValue.InventoryVoucher = null;
-					}
-					this._InventoryVoucherItem.Entity = value;
-					if ((value != null))
-					{
-						value.InventoryVoucher = this;
-					}
-					this.SendPropertyChanged("InventoryVoucherItem");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Store_InventoryVoucher", Storage="_Store", ThisKey="ID", OtherKey="ID", IsForeignKey=true)]
-		public Store Store
-		{
-			get
-			{
-				return this._Store.Entity;
-			}
-			set
-			{
-				Store previousValue = this._Store.Entity;
-				if (((previousValue != value) 
-							|| (this._Store.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Store.Entity = null;
-						previousValue.InventoryVoucher = null;
-					}
-					this._Store.Entity = value;
-					if ((value != null))
-					{
-						value.InventoryVoucher = this;
-						this._ID = value.ID;
-					}
-					else
-					{
-						this._ID = default(long);
-					}
-					this.SendPropertyChanged("Store");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="TRN3.InventoryVoucherItem")]
-	public partial class InventoryVoucherItem : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _ID;
-		
-		private long _InventoryVoucherRef;
-		
-		private long _PartRef;
-		
-		private decimal _Quantity;
-		
-		private System.Data.Linq.Binary _Version;
-		
-		private EntityRef<InventoryVoucher> _InventoryVoucher;
-		
-		private EntityRef<Part> _Part;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(long value);
-    partial void OnIDChanged();
-    partial void OnInventoryVoucherRefChanging(long value);
-    partial void OnInventoryVoucherRefChanged();
-    partial void OnPartRefChanging(long value);
-    partial void OnPartRefChanged();
-    partial void OnQuantityChanging(decimal value);
-    partial void OnQuantityChanged();
-    partial void OnVersionChanging(System.Data.Linq.Binary value);
-    partial void OnVersionChanged();
-    #endregion
-		
-		public InventoryVoucherItem()
-		{
-			this._InventoryVoucher = default(EntityRef<InventoryVoucher>);
-			this._Part = default(EntityRef<Part>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="InventoryVoucherItemID", Storage="_ID", DbType="BigInt NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-		public override long ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InventoryVoucherRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public long InventoryVoucherRef
-		{
-			get
-			{
-				return this._InventoryVoucherRef;
-			}
-			set
-			{
-				if ((this._InventoryVoucherRef != value))
-				{
-					this.OnInventoryVoucherRefChanging(value);
-					this.SendPropertyChanging();
-					this._InventoryVoucherRef = value;
-					this.SendPropertyChanged("InventoryVoucherRef");
-					this.OnInventoryVoucherRefChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public long PartRef
-		{
-			get
-			{
-				return this._PartRef;
-			}
-			set
-			{
-				if ((this._PartRef != value))
-				{
-					this.OnPartRefChanging(value);
-					this.SendPropertyChanging();
-					this._PartRef = value;
-					this.SendPropertyChanged("PartRef");
-					this.OnPartRefChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Decimal(28,6) NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public decimal Quantity
-		{
-			get
-			{
-				return this._Quantity;
-			}
-			set
-			{
-				if ((this._Quantity != value))
-				{
-					this.OnQuantityChanging(value);
-					this.SendPropertyChanging();
-					this._Quantity = value;
-					this.SendPropertyChanged("Quantity");
-					this.OnQuantityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Version
-		{
-			get
-			{
-				return this._Version;
-			}
-			set
-			{
-				if ((this._Version != value))
-				{
-					this.OnVersionChanging(value);
-					this.SendPropertyChanging();
-					this._Version = value;
-					this.SendPropertyChanged("Version");
-					this.OnVersionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InventoryVoucher_InventoryVoucherItem", Storage="_InventoryVoucher", ThisKey="ID", OtherKey="ID", IsForeignKey=true)]
-		public InventoryVoucher InventoryVoucher
-		{
-			get
-			{
-				return this._InventoryVoucher.Entity;
-			}
-			set
-			{
-				InventoryVoucher previousValue = this._InventoryVoucher.Entity;
-				if (((previousValue != value) 
-							|| (this._InventoryVoucher.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InventoryVoucher.Entity = null;
-						previousValue.InventoryVoucherItem = null;
-					}
-					this._InventoryVoucher.Entity = value;
-					if ((value != null))
-					{
-						value.InventoryVoucherItem = this;
-						this._ID = value.ID;
-					}
-					else
-					{
-						this._ID = default(long);
-					}
-					this.SendPropertyChanged("InventoryVoucher");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Part_InventoryVoucherItem", Storage="_Part", ThisKey="ID", OtherKey="ID", IsForeignKey=true)]
-		public Part Part
-		{
-			get
-			{
-				return this._Part.Entity;
-			}
-			set
-			{
-				Part previousValue = this._Part.Entity;
-				if (((previousValue != value) 
-							|| (this._Part.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Part.Entity = null;
-						previousValue.InventoryVoucherItem = null;
-					}
-					this._Part.Entity = value;
-					if ((value != null))
-					{
-						value.InventoryVoucherItem = this;
-						this._ID = value.ID;
-					}
-					else
-					{
-						this._ID = default(long);
-					}
-					this.SendPropertyChanged("Part");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="TRN3.Part")]
 	public partial class Part : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -687,9 +156,9 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		private System.Data.Linq.Binary _Version;
 		
-		private EntityRef<InventoryVoucherItem> _InventoryVoucherItem;
+		private EntitySet<InventoryVoucherItem> _InventoryVoucherItems;
 		
-		private EntityRef<PartStore> _PartStore;
+		private EntitySet<PartStore> _PartStores;
 		
 		private EntityRef<Unit> _Unit;
 		
@@ -711,8 +180,8 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		public Part()
 		{
-			this._InventoryVoucherItem = default(EntityRef<InventoryVoucherItem>);
-			this._PartStore = default(EntityRef<PartStore>);
+			this._InventoryVoucherItems = new EntitySet<InventoryVoucherItem>(new Action<InventoryVoucherItem>(this.attach_InventoryVoucherItems), new Action<InventoryVoucherItem>(this.detach_InventoryVoucherItems));
+			this._PartStores = new EntitySet<PartStore>(new Action<PartStore>(this.attach_PartStores), new Action<PartStore>(this.detach_PartStores));
 			this._Unit = default(EntityRef<Unit>);
 			OnCreated();
 		}
@@ -788,6 +257,10 @@ namespace SystemGroup.Training.StoreManagement.Common
 			{
 				if ((this._UnitRef != value))
 				{
+					if (this._Unit.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnUnitRefChanging(value);
 					this.SendPropertyChanging();
 					this._UnitRef = value;
@@ -817,65 +290,33 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Part_InventoryVoucherItem", Storage="_InventoryVoucherItem", ThisKey="ID", OtherKey="ID", IsUnique=true, IsForeignKey=false)]
-		public InventoryVoucherItem InventoryVoucherItem
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Part_InventoryVoucherItem", Storage="_InventoryVoucherItems", ThisKey="ID", OtherKey="PartRef")]
+		public EntitySet<InventoryVoucherItem> InventoryVoucherItems
 		{
 			get
 			{
-				return this._InventoryVoucherItem.Entity;
+				return this._InventoryVoucherItems;
 			}
 			set
 			{
-				InventoryVoucherItem previousValue = this._InventoryVoucherItem.Entity;
-				if (((previousValue != value) 
-							|| (this._InventoryVoucherItem.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InventoryVoucherItem.Entity = null;
-						previousValue.Part = null;
-					}
-					this._InventoryVoucherItem.Entity = value;
-					if ((value != null))
-					{
-						value.Part = this;
-					}
-					this.SendPropertyChanged("InventoryVoucherItem");
-				}
+				this._InventoryVoucherItems.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Part_PartStore", Storage="_PartStore", ThisKey="ID", OtherKey="ID", IsUnique=true, IsForeignKey=false)]
-		public PartStore PartStore
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Part_PartStore", Storage="_PartStores", ThisKey="ID", OtherKey="PartRef")]
+		public EntitySet<PartStore> PartStores
 		{
 			get
 			{
-				return this._PartStore.Entity;
+				return this._PartStores;
 			}
 			set
 			{
-				PartStore previousValue = this._PartStore.Entity;
-				if (((previousValue != value) 
-							|| (this._PartStore.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PartStore.Entity = null;
-						previousValue.Part = null;
-					}
-					this._PartStore.Entity = value;
-					if ((value != null))
-					{
-						value.Part = this;
-					}
-					this.SendPropertyChanged("PartStore");
-				}
+				this._PartStores.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Unit_Part", Storage="_Unit", ThisKey="ID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Unit_Part", Storage="_Unit", ThisKey="UnitRef", OtherKey="ID", IsForeignKey=true)]
 		public Unit Unit
 		{
 			get
@@ -892,17 +333,17 @@ namespace SystemGroup.Training.StoreManagement.Common
 					if ((previousValue != null))
 					{
 						this._Unit.Entity = null;
-						previousValue.Part = null;
+						previousValue.Parts.Remove(this);
 					}
 					this._Unit.Entity = value;
 					if ((value != null))
 					{
-						value.Part = this;
-						this._ID = value.ID;
+						value.Parts.Add(this);
+						this._UnitRef = value.ID;
 					}
 					else
 					{
-						this._ID = default(long);
+						this._UnitRef = default(long);
 					}
 					this.SendPropertyChanged("Unit");
 				}
@@ -927,6 +368,706 @@ namespace SystemGroup.Training.StoreManagement.Common
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_InventoryVoucherItems(InventoryVoucherItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Part = this;
+		}
+		
+		private void detach_InventoryVoucherItems(InventoryVoucherItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Part = null;
+		}
+		
+		private void attach_PartStores(PartStore entity)
+		{
+			this.SendPropertyChanging();
+			entity.Part = this;
+		}
+		
+		private void detach_PartStores(PartStore entity)
+		{
+			this.SendPropertyChanging();
+			entity.Part = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TRN3.InventoryVoucherItem")]
+	public partial class InventoryVoucherItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _ID;
+		
+		private long _InventoryVoucherRef;
+		
+		private long _PartRef;
+		
+		private decimal _Quantity;
+		
+		private System.Data.Linq.Binary _Version;
+		
+		private EntityRef<Part> _Part;
+		
+		private EntityRef<InventoryVoucher> _InventoryVoucher;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
+    partial void OnInventoryVoucherRefChanging(long value);
+    partial void OnInventoryVoucherRefChanged();
+    partial void OnPartRefChanging(long value);
+    partial void OnPartRefChanged();
+    partial void OnQuantityChanging(decimal value);
+    partial void OnQuantityChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    #endregion
+		
+		public InventoryVoucherItem()
+		{
+			this._Part = default(EntityRef<Part>);
+			this._InventoryVoucher = default(EntityRef<InventoryVoucher>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="InventoryVoucherItemID", Storage="_ID", DbType="BigInt NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public override long ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InventoryVoucherRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long InventoryVoucherRef
+		{
+			get
+			{
+				return this._InventoryVoucherRef;
+			}
+			set
+			{
+				if ((this._InventoryVoucherRef != value))
+				{
+					if (this._InventoryVoucher.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnInventoryVoucherRefChanging(value);
+					this.SendPropertyChanging();
+					this._InventoryVoucherRef = value;
+					this.SendPropertyChanged("InventoryVoucherRef");
+					this.OnInventoryVoucherRefChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long PartRef
+		{
+			get
+			{
+				return this._PartRef;
+			}
+			set
+			{
+				if ((this._PartRef != value))
+				{
+					if (this._Part.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPartRefChanging(value);
+					this.SendPropertyChanging();
+					this._PartRef = value;
+					this.SendPropertyChanged("PartRef");
+					this.OnPartRefChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Decimal(28,6) NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public decimal Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Version
+		{
+			get
+			{
+				return this._Version;
+			}
+			set
+			{
+				if ((this._Version != value))
+				{
+					this.OnVersionChanging(value);
+					this.SendPropertyChanging();
+					this._Version = value;
+					this.SendPropertyChanged("Version");
+					this.OnVersionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Part_InventoryVoucherItem", Storage="_Part", ThisKey="PartRef", OtherKey="ID", IsForeignKey=true)]
+		public Part Part
+		{
+			get
+			{
+				return this._Part.Entity;
+			}
+			set
+			{
+				Part previousValue = this._Part.Entity;
+				if (((previousValue != value) 
+							|| (this._Part.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Part.Entity = null;
+						previousValue.InventoryVoucherItems.Remove(this);
+					}
+					this._Part.Entity = value;
+					if ((value != null))
+					{
+						value.InventoryVoucherItems.Add(this);
+						this._PartRef = value.ID;
+					}
+					else
+					{
+						this._PartRef = default(long);
+					}
+					this.SendPropertyChanged("Part");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InventoryVoucher_InventoryVoucherItem", Storage="_InventoryVoucher", ThisKey="InventoryVoucherRef", OtherKey="ID", IsForeignKey=true)]
+		public InventoryVoucher InventoryVoucher
+		{
+			get
+			{
+				return this._InventoryVoucher.Entity;
+			}
+			set
+			{
+				InventoryVoucher previousValue = this._InventoryVoucher.Entity;
+				if (((previousValue != value) 
+							|| (this._InventoryVoucher.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InventoryVoucher.Entity = null;
+						previousValue.InventoryVoucherItems.Remove(this);
+					}
+					this._InventoryVoucher.Entity = value;
+					if ((value != null))
+					{
+						value.InventoryVoucherItems.Add(this);
+						this._InventoryVoucherRef = value.ID;
+					}
+					else
+					{
+						this._InventoryVoucherRef = default(long);
+					}
+					this.SendPropertyChanged("InventoryVoucher");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TRN3.InventoryVoucher")]
+	public partial class InventoryVoucher : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _ID;
+		
+		private string _Number;
+		
+		private System.DateTime _Date;
+		
+		private InventoryVoucherType _Type;
+		
+		private long _StoreRef;
+		
+		private long _StoreKeeperRef;
+		
+		private InventoryVoucherState _State;
+		
+		private System.Data.Linq.Binary _Version;
+		
+		private long _Creator;
+		
+		private long _LastModifier;
+		
+		private System.DateTime _CreationDate;
+		
+		private System.DateTime _LastModificationDate;
+		
+		private EntitySet<InventoryVoucherItem> _InventoryVoucherItems;
+		
+		private EntityRef<Store> _Store;
+		
+		private EntityRef<StoreKeeper> _StoreKeeper;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
+    partial void OnNumberChanging(string value);
+    partial void OnNumberChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnTypeChanging(InventoryVoucherType value);
+    partial void OnTypeChanged();
+    partial void OnStoreRefChanging(long value);
+    partial void OnStoreRefChanged();
+    partial void OnStoreKeeperRefChanging(long value);
+    partial void OnStoreKeeperRefChanged();
+    partial void OnStateChanging(InventoryVoucherState value);
+    partial void OnStateChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    partial void OnCreatorChanging(long value);
+    partial void OnCreatorChanged();
+    partial void OnLastModifierChanging(long value);
+    partial void OnLastModifierChanged();
+    partial void OnCreationDateChanging(System.DateTime value);
+    partial void OnCreationDateChanged();
+    partial void OnLastModificationDateChanging(System.DateTime value);
+    partial void OnLastModificationDateChanged();
+    #endregion
+		
+		public InventoryVoucher()
+		{
+			this._InventoryVoucherItems = new EntitySet<InventoryVoucherItem>(new Action<InventoryVoucherItem>(this.attach_InventoryVoucherItems), new Action<InventoryVoucherItem>(this.detach_InventoryVoucherItems));
+			this._Store = default(EntityRef<Store>);
+			this._StoreKeeper = default(EntityRef<StoreKeeper>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="InventoryVoucherID", Storage="_ID", DbType="BigInt NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public override long ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Number", DbType="NVarChar(250) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Number
+		{
+			get
+			{
+				return this._Number;
+			}
+			set
+			{
+				if ((this._Number != value))
+				{
+					this.OnNumberChanging(value);
+					this.SendPropertyChanging();
+					this._Number = value;
+					this.SendPropertyChanged("Number");
+					this.OnNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public InventoryVoucherType Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoreRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long StoreRef
+		{
+			get
+			{
+				return this._StoreRef;
+			}
+			set
+			{
+				if ((this._StoreRef != value))
+				{
+					if (this._Store.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStoreRefChanging(value);
+					this.SendPropertyChanging();
+					this._StoreRef = value;
+					this.SendPropertyChanged("StoreRef");
+					this.OnStoreRefChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoreKeeperRef", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long StoreKeeperRef
+		{
+			get
+			{
+				return this._StoreKeeperRef;
+			}
+			set
+			{
+				if ((this._StoreKeeperRef != value))
+				{
+					if (this._StoreKeeper.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStoreKeeperRefChanging(value);
+					this.SendPropertyChanging();
+					this._StoreKeeperRef = value;
+					this.SendPropertyChanged("StoreKeeperRef");
+					this.OnStoreKeeperRefChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="Int NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public InventoryVoucherState State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Version
+		{
+			get
+			{
+				return this._Version;
+			}
+			set
+			{
+				if ((this._Version != value))
+				{
+					this.OnVersionChanging(value);
+					this.SendPropertyChanging();
+					this._Version = value;
+					this.SendPropertyChanged("Version");
+					this.OnVersionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Creator", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long Creator
+		{
+			get
+			{
+				return this._Creator;
+			}
+			set
+			{
+				if ((this._Creator != value))
+				{
+					this.OnCreatorChanging(value);
+					this.SendPropertyChanging();
+					this._Creator = value;
+					this.SendPropertyChanged("Creator");
+					this.OnCreatorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifier", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long LastModifier
+		{
+			get
+			{
+				return this._LastModifier;
+			}
+			set
+			{
+				if ((this._LastModifier != value))
+				{
+					this.OnLastModifierChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifier = value;
+					this.SendPropertyChanged("LastModifier");
+					this.OnLastModifierChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreationDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public System.DateTime CreationDate
+		{
+			get
+			{
+				return this._CreationDate;
+			}
+			set
+			{
+				if ((this._CreationDate != value))
+				{
+					this.OnCreationDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreationDate = value;
+					this.SendPropertyChanged("CreationDate");
+					this.OnCreationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModificationDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public System.DateTime LastModificationDate
+		{
+			get
+			{
+				return this._LastModificationDate;
+			}
+			set
+			{
+				if ((this._LastModificationDate != value))
+				{
+					this.OnLastModificationDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastModificationDate = value;
+					this.SendPropertyChanged("LastModificationDate");
+					this.OnLastModificationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InventoryVoucher_InventoryVoucherItem", Storage="_InventoryVoucherItems", ThisKey="ID", OtherKey="InventoryVoucherRef")]
+		public EntitySet<InventoryVoucherItem> InventoryVoucherItems
+		{
+			get
+			{
+				return this._InventoryVoucherItems;
+			}
+			set
+			{
+				this._InventoryVoucherItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Store_InventoryVoucher", Storage="_Store", ThisKey="StoreRef", OtherKey="ID", IsForeignKey=true)]
+		public Store Store
+		{
+			get
+			{
+				return this._Store.Entity;
+			}
+			set
+			{
+				Store previousValue = this._Store.Entity;
+				if (((previousValue != value) 
+							|| (this._Store.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Store.Entity = null;
+						previousValue.InventoryVouchers.Remove(this);
+					}
+					this._Store.Entity = value;
+					if ((value != null))
+					{
+						value.InventoryVouchers.Add(this);
+						this._StoreRef = value.ID;
+					}
+					else
+					{
+						this._StoreRef = default(long);
+					}
+					this.SendPropertyChanged("Store");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StoreKeeper_InventoryVoucher", Storage="_StoreKeeper", ThisKey="StoreKeeperRef", OtherKey="ID", IsForeignKey=true)]
+		public StoreKeeper StoreKeeper
+		{
+			get
+			{
+				return this._StoreKeeper.Entity;
+			}
+			set
+			{
+				StoreKeeper previousValue = this._StoreKeeper.Entity;
+				if (((previousValue != value) 
+							|| (this._StoreKeeper.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._StoreKeeper.Entity = null;
+						previousValue.InventoryVouchers.Remove(this);
+					}
+					this._StoreKeeper.Entity = value;
+					if ((value != null))
+					{
+						value.InventoryVouchers.Add(this);
+						this._StoreKeeperRef = value.ID;
+					}
+					else
+					{
+						this._StoreKeeperRef = default(long);
+					}
+					this.SendPropertyChanged("StoreKeeper");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_InventoryVoucherItems(InventoryVoucherItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.InventoryVoucher = this;
+		}
+		
+		private void detach_InventoryVoucherItems(InventoryVoucherItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.InventoryVoucher = null;
 		}
 	}
 	
@@ -1000,6 +1141,10 @@ namespace SystemGroup.Training.StoreManagement.Common
 			{
 				if ((this._PartRef != value))
 				{
+					if (this._Part.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnPartRefChanging(value);
 					this.SendPropertyChanging();
 					this._PartRef = value;
@@ -1020,6 +1165,10 @@ namespace SystemGroup.Training.StoreManagement.Common
 			{
 				if ((this._StoreRef != value))
 				{
+					if (this._Store.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnStoreRefChanging(value);
 					this.SendPropertyChanging();
 					this._StoreRef = value;
@@ -1049,7 +1198,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Part_PartStore", Storage="_Part", ThisKey="ID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Part_PartStore", Storage="_Part", ThisKey="PartRef", OtherKey="ID", IsForeignKey=true)]
 		public Part Part
 		{
 			get
@@ -1066,24 +1215,24 @@ namespace SystemGroup.Training.StoreManagement.Common
 					if ((previousValue != null))
 					{
 						this._Part.Entity = null;
-						previousValue.PartStore = null;
+						previousValue.PartStores.Remove(this);
 					}
 					this._Part.Entity = value;
 					if ((value != null))
 					{
-						value.PartStore = this;
-						this._ID = value.ID;
+						value.PartStores.Add(this);
+						this._PartRef = value.ID;
 					}
 					else
 					{
-						this._ID = default(long);
+						this._PartRef = default(long);
 					}
 					this.SendPropertyChanged("Part");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Store_PartStore", Storage="_Store", ThisKey="ID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Store_PartStore", Storage="_Store", ThisKey="StoreRef", OtherKey="ID", IsForeignKey=true)]
 		public Store Store
 		{
 			get
@@ -1100,17 +1249,17 @@ namespace SystemGroup.Training.StoreManagement.Common
 					if ((previousValue != null))
 					{
 						this._Store.Entity = null;
-						previousValue.PartStore = null;
+						previousValue.PartStores.Remove(this);
 					}
 					this._Store.Entity = value;
 					if ((value != null))
 					{
-						value.PartStore = this;
-						this._ID = value.ID;
+						value.PartStores.Add(this);
+						this._StoreRef = value.ID;
 					}
 					else
 					{
-						this._ID = default(long);
+						this._StoreRef = default(long);
 					}
 					this.SendPropertyChanged("Store");
 				}
@@ -1152,9 +1301,9 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		private System.Data.Linq.Binary _Version;
 		
-		private EntityRef<InventoryVoucher> _InventoryVoucher;
+		private EntitySet<InventoryVoucher> _InventoryVouchers;
 		
-		private EntityRef<PartStore> _PartStore;
+		private EntitySet<PartStore> _PartStores;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1172,8 +1321,8 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		public Store()
 		{
-			this._InventoryVoucher = default(EntityRef<InventoryVoucher>);
-			this._PartStore = default(EntityRef<PartStore>);
+			this._InventoryVouchers = new EntitySet<InventoryVoucher>(new Action<InventoryVoucher>(this.attach_InventoryVouchers), new Action<InventoryVoucher>(this.detach_InventoryVouchers));
+			this._PartStores = new EntitySet<PartStore>(new Action<PartStore>(this.attach_PartStores), new Action<PartStore>(this.detach_PartStores));
 			OnCreated();
 		}
 		
@@ -1257,61 +1406,29 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Store_InventoryVoucher", Storage="_InventoryVoucher", ThisKey="ID", OtherKey="ID", IsUnique=true, IsForeignKey=false)]
-		public InventoryVoucher InventoryVoucher
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Store_InventoryVoucher", Storage="_InventoryVouchers", ThisKey="ID", OtherKey="StoreRef")]
+		public EntitySet<InventoryVoucher> InventoryVouchers
 		{
 			get
 			{
-				return this._InventoryVoucher.Entity;
+				return this._InventoryVouchers;
 			}
 			set
 			{
-				InventoryVoucher previousValue = this._InventoryVoucher.Entity;
-				if (((previousValue != value) 
-							|| (this._InventoryVoucher.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InventoryVoucher.Entity = null;
-						previousValue.Store = null;
-					}
-					this._InventoryVoucher.Entity = value;
-					if ((value != null))
-					{
-						value.Store = this;
-					}
-					this.SendPropertyChanged("InventoryVoucher");
-				}
+				this._InventoryVouchers.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Store_PartStore", Storage="_PartStore", ThisKey="ID", OtherKey="ID", IsUnique=true, IsForeignKey=false)]
-		public PartStore PartStore
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Store_PartStore", Storage="_PartStores", ThisKey="ID", OtherKey="StoreRef")]
+		public EntitySet<PartStore> PartStores
 		{
 			get
 			{
-				return this._PartStore.Entity;
+				return this._PartStores;
 			}
 			set
 			{
-				PartStore previousValue = this._PartStore.Entity;
-				if (((previousValue != value) 
-							|| (this._PartStore.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PartStore.Entity = null;
-						previousValue.Store = null;
-					}
-					this._PartStore.Entity = value;
-					if ((value != null))
-					{
-						value.Store = this;
-					}
-					this.SendPropertyChanged("PartStore");
-				}
+				this._PartStores.Assign(value);
 			}
 		}
 		
@@ -1334,6 +1451,30 @@ namespace SystemGroup.Training.StoreManagement.Common
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_InventoryVouchers(InventoryVoucher entity)
+		{
+			this.SendPropertyChanging();
+			entity.Store = this;
+		}
+		
+		private void detach_InventoryVouchers(InventoryVoucher entity)
+		{
+			this.SendPropertyChanging();
+			entity.Store = null;
+		}
+		
+		private void attach_PartStores(PartStore entity)
+		{
+			this.SendPropertyChanging();
+			entity.Store = this;
+		}
+		
+		private void detach_PartStores(PartStore entity)
+		{
+			this.SendPropertyChanging();
+			entity.Store = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="TRN3.StoreKeeper")]
@@ -1347,6 +1488,8 @@ namespace SystemGroup.Training.StoreManagement.Common
 		private long _PartyRef;
 		
 		private System.Data.Linq.Binary _Version;
+		
+		private EntitySet<InventoryVoucher> _InventoryVouchers;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1362,6 +1505,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		public StoreKeeper()
 		{
+			this._InventoryVouchers = new EntitySet<InventoryVoucher>(new Action<InventoryVoucher>(this.attach_InventoryVouchers), new Action<InventoryVoucher>(this.detach_InventoryVouchers));
 			OnCreated();
 		}
 		
@@ -1425,6 +1569,19 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StoreKeeper_InventoryVoucher", Storage="_InventoryVouchers", ThisKey="ID", OtherKey="StoreKeeperRef")]
+		public EntitySet<InventoryVoucher> InventoryVouchers
+		{
+			get
+			{
+				return this._InventoryVouchers;
+			}
+			set
+			{
+				this._InventoryVouchers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1444,6 +1601,18 @@ namespace SystemGroup.Training.StoreManagement.Common
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_InventoryVouchers(InventoryVoucher entity)
+		{
+			this.SendPropertyChanging();
+			entity.StoreKeeper = this;
+		}
+		
+		private void detach_InventoryVouchers(InventoryVoucher entity)
+		{
+			this.SendPropertyChanging();
+			entity.StoreKeeper = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="TRN3.Unit")]
@@ -1458,7 +1627,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		private System.Data.Linq.Binary _Version;
 		
-		private EntityRef<Part> _Part;
+		private EntitySet<Part> _Parts;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1474,7 +1643,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 		
 		public Unit()
 		{
-			this._Part = default(EntityRef<Part>);
+			this._Parts = new EntitySet<Part>(new Action<Part>(this.attach_Parts), new Action<Part>(this.detach_Parts));
 			OnCreated();
 		}
 		
@@ -1538,32 +1707,16 @@ namespace SystemGroup.Training.StoreManagement.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Unit_Part", Storage="_Part", ThisKey="ID", OtherKey="ID", IsUnique=true, IsForeignKey=false)]
-		public Part Part
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Unit_Part", Storage="_Parts", ThisKey="ID", OtherKey="UnitRef")]
+		public EntitySet<Part> Parts
 		{
 			get
 			{
-				return this._Part.Entity;
+				return this._Parts;
 			}
 			set
 			{
-				Part previousValue = this._Part.Entity;
-				if (((previousValue != value) 
-							|| (this._Part.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Part.Entity = null;
-						previousValue.Unit = null;
-					}
-					this._Part.Entity = value;
-					if ((value != null))
-					{
-						value.Unit = this;
-					}
-					this.SendPropertyChanged("Part");
-				}
+				this._Parts.Assign(value);
 			}
 		}
 		
@@ -1585,6 +1738,18 @@ namespace SystemGroup.Training.StoreManagement.Common
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Parts(Part entity)
+		{
+			this.SendPropertyChanging();
+			entity.Unit = this;
+		}
+		
+		private void detach_Parts(Part entity)
+		{
+			this.SendPropertyChanging();
+			entity.Unit = null;
 		}
 	}
 }

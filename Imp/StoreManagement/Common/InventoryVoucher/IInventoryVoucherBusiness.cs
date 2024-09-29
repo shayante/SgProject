@@ -10,9 +10,9 @@ using SystemGroup.Framework.Service;
 namespace SystemGroup.Training.StoreManagement.Common
 {
     [ServiceInterface]
-    public interface IUnitBusiness : IBusinessBase<Unit>
+    public interface IInventoryVoucherBusiness : IBusinessBase<InventoryVoucher>
     {
-        [EntityView("AllUnits", "Views_AllUnits", typeof(UnitProjection), "Title", IsDefaultView = true)]
-        new IQueryable<Unit> FetchAll();
+        [EntityView("AllInventoryVouchers", "Views_AllInventoryVouchers", typeof(InventoryVoucherProjection), "Number", IsDefaultView = true)]
+        new IQueryable<InventoryVoucher> FetchAll();
     }
 }

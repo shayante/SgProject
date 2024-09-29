@@ -18,7 +18,13 @@
 	  <EmbeddedResource Update="InventoryVoucherItem.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
+	  <EmbeddedResource Update="Labels_Strings.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Links.Strings.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="LogicalResources.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Messages.Strings.resx">
@@ -28,6 +34,9 @@
 	    <Generator></Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Store.Strings.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="StoreKeeper.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Unit.Strings.resx">

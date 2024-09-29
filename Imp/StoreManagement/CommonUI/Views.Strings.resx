@@ -123,4 +123,13 @@
   <data name="AllParts" xml:space="preserve">
     <value>همه کالا ها</value>
   </data>
+  <data name="AllInventoryVouchers" xml:space="preserve">
+    <value>همه اسناد انبار</value>
+  </data>
+  <data name="AllStores" xml:space="preserve">
+    <value>همه انبارها</value>
+  </data>
+  <data name="AllStoreKeepers" xml:space="preserve">
+    <value>همه انباردار ها</value>
+  </data>
 </root>

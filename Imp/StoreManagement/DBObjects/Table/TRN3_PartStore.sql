@@ -50,7 +50,7 @@ GO
 --<< FOREIGNKEYS DEFINITION >>--
 
 If not Exists (select 1 from sys.objects where name = 'FK_TRN3_PartStore_PartRef')
-ALTER TABLE [TRN3].[PartStore]  ADD  CONSTRAINT [FK_TRN3_PartStore_PartRef] FOREIGN KEY([PartStoreID])
+ALTER TABLE [TRN3].[PartStore]  ADD  CONSTRAINT [FK_TRN3_PartStore_PartRef] FOREIGN KEY([PartRef])
 REFERENCES [TRN3].[Part] ([PartID])
 
 GO

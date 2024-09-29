@@ -8,6 +8,8 @@
 		<OutputPath>..\..\..\..\Bin\</OutputPath>
 	</PropertyGroup>
 
+	
+
 	<ItemGroup>
 		<Reference Include="System.Data.Linq">
 			<HintPath>$(OutputPath)\System.Data.Linq.dll</HintPath>
@@ -15,9 +17,11 @@
 		<Reference Include="SystemGroup.Framework">
 			<HintPath>$(OutputPath)\SystemGroup.Framework.dll</HintPath>
 		</Reference>
+
 		<Reference Include="SystemGroup.Training.StoreManagement.Common">
 			<HintPath>$(OutputPath)\SystemGroup.Training.StoreManagement.Common.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 
+	
 </Project>
