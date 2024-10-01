@@ -25,18 +25,18 @@ namespace SystemGroup.Training.StoreManagement.Web.PartPages
             var layout = fieldSet.Add<DynamicFieldLayoutView>().NumberOfColumns(1);
 
             var row = layout.AddRow();
-            row.SetLabelByKey("Part_Code".GetKey(), true);
+            row.SetLabelByKey("Part_Code", true);
             row.SetInput<TextBoxView>().RealizedIn(() => txtCode);
             row.SetRequiredValidator();
 
             row = layout.AddRow();
-            row.SetLabelByKey("Part_Title".GetKey(), true);
+            row.SetLabelByKey("Part_Title", true);
             row.SetInput<TextBoxView>().RealizedIn(() => txtTitle);
             row.SetRequiredValidator();
 
 
             row = layout.AddRow();
-            row.SetLabelByKey("Part_UnitRef".GetKey(), true);
+            row.SetLabelByKey("Part_UnitRef", true);
             row.SetInput<SelectorView>().RealizedIn(() => sltUnitRef)
                 .ComponentName("SystemGroup.Training.StoreManagement")
                 .EntityView<Unit>("AllUnits");

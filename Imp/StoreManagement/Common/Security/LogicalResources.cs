@@ -13,31 +13,31 @@ namespace SystemGroup.Logistics.InventoryManagement.Common
 
         public void DeclareLogicalResourceTree(IList<LogicalResourceTreeNode> list)
         {
-            LogicalResourceTreeNode res = new LogicalResourceCategory("Training", "LogicalResources_Training".GetKey(),
-                new LogicalResourceCategory("StoreManagement", "LogicalResources_StoreManagement".GetKey(),
-                    new CompositeLogicalResource("Unit", "LogicalResources_Unit".GetKey(),
+            LogicalResourceTreeNode res = new LogicalResourceCategory("Training", "LogicalResources_Training",
+                new LogicalResourceCategory("StoreManagement", "LogicalResources_StoreManagement",
+                    new CompositeLogicalResource("Unit", "LogicalResources_Unit",
                                      typeof(Unit),
-                                      new LogicalResource("New", "LogicalResources_New".GetKey()),
-                                      new LogicalResource("Edit", "LogicalResources_Edit".GetKey()),
-                                      new LogicalResource("Delete", "LogicalResources_Delete".GetKey())
+                                      new LogicalResource("New", "LogicalResources_New"),
+                                      new LogicalResource("Edit", "LogicalResources_Edit"),
+                                      new LogicalResource("Delete", "LogicalResources_Delete")
                     ),
-                    new CompositeLogicalResource("Part", "LogicalResources_Part".GetKey(),
+                    new CompositeLogicalResource("Part", "LogicalResources_Part",
                                      typeof(Part),
-                                      new LogicalResource("New", "LogicalResources_New".GetKey()),
-                                      new LogicalResource("Edit", "LogicalResources_Edit".GetKey()),
-                                      new LogicalResource("Delete", "LogicalResources_Delete".GetKey())
+                                      new LogicalResource("New", "LogicalResources_New"),
+                                      new LogicalResource("Edit", "LogicalResources_Edit"),
+                                      new LogicalResource("Delete", "LogicalResources_Delete")
                     ),
-                    new CompositeLogicalResource("Store", "LogicalResources_Store".GetKey(),
+                    new CompositeLogicalResource("Store", "LogicalResources_Store",
                                      typeof(Store),
-                                      new LogicalResource("New", "LogicalResources_New".GetKey()),
-                                      new LogicalResource("Edit", "LogicalResources_Edit".GetKey()),
-                                      new LogicalResource("Delete", "LogicalResources_Delete".GetKey())
+                                      new LogicalResource("New", "LogicalResources_New"),
+                                      new LogicalResource("Edit", "LogicalResources_Edit"),
+                                      new LogicalResource("Delete", "LogicalResources_Delete")
                     ),
-                    new CompositeLogicalResource("InventoryVoucher", "LogicalResources_InventoryVoucher".GetKey(),
+                    new CompositeLogicalResource("InventoryVoucher", "LogicalResources_InventoryVoucher",
                                      typeof(InventoryVoucher),
-                                      new LogicalResource("New", "LogicalResources_New".GetKey()),
-                                      new LogicalResource("Edit", "LogicalResources_Edit".GetKey()),
-                                      new LogicalResource("Delete", "LogicalResources_Delete".GetKey())
+                                      new LogicalResource("New", "LogicalResources_New"),
+                                      new LogicalResource("Edit", "LogicalResources_Edit"),
+                                      new LogicalResource("Delete", "LogicalResources_Delete")
                     )
                 )
             );

@@ -28,7 +28,7 @@ namespace SystemGroup.Training.StoreManagement.Web.UnitPages
             var layout = fieldSet.Add<DynamicFieldLayoutView>().NumberOfColumns(3);
 
             var row = layout.AddRow();
-            row.SetLabelByKey("Unit_Title".GetKey(), true);
+            row.SetLabelByKey("Unit_Title", true);
             row.SetInput<TextBoxView>()
                 .RealizedIn(() => txtTitle);
             row.SetRequiredValidator();

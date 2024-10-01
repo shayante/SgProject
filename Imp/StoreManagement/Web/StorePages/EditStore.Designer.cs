@@ -39,13 +39,13 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
             var layout = fieldSet.Add<DynamicFieldLayoutView>();
 
             var row = layout.AddRow();
-            row.SetLabelByKey("Store_Code".GetKey(), true);
+            row.SetLabelByKey("Store_Code", true);
             row.SetInput<TextBoxView>().RealizedIn(() => txtCode);
             row.SetRequiredValidator();
 
 
             row = layout.AddRow();
-            row.SetLabelByKey("Store_Name".GetKey(), true);
+            row.SetLabelByKey("Store_Name", true);
             row.SetInput<TextBoxView>().RealizedIn(() => txtName);
             row.SetRequiredValidator();
 
