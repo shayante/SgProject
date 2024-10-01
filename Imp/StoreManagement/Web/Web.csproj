@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="StorePages\Edit.js" />
+	  <None Remove="Extension\StoreKeeperExtension.ascx" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -17,13 +17,19 @@
 		<EmbeddedResource Include="Icons\AddMultiple.png" />
 		<EmbeddedResource Include="Icons\List.gif" />
 		<EmbeddedResource Include="StorePages\EditStore.cs" />
+		<EmbeddedResource Include="Extension\StoreKeeperExtension.ascx" />
 		<EmbeddedResource Include="PartPages\EditPart.cs" />
 		<EmbeddedResource Include="StorePages\Edit.js" />
 	</ItemGroup>
 
-
 	<ItemGroup>
-	  <EmbeddedResource Include="StorePages\Edit.js" />
+		<Compile Update="Extension\StoreKeeperExtension.ascx.cs">
+			<DependentUpon>StoreKeeperExtension.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Update="Extension\StoreKeeperExtension.ascx.designer.cs">
+			<DependentUpon>StoreKeeperExtension.ascx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 

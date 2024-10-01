@@ -18,7 +18,7 @@
 	  <EmbeddedResource Update="InventoryVoucherItem.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="Labels_Strings.resx">
+	  <EmbeddedResource Update="Labels.Strings.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Links.Strings.resx">

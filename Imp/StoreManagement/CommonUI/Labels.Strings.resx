@@ -138,4 +138,22 @@
   <data name="Training" xml:space="preserve">
     <value>منوی تستی</value>
   </data>
+  <data name="Adding" xml:space="preserve">
+    <value>اضافه کردن</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="AddMultipleParts" xml:space="preserve">
+    <value>افزودن گروهی کالا</value>
+  </data>
+  <data name="ApplySelection" xml:space="preserve">
+    <value>تایید</value>
+  </data>
+  <data name="CancelSelection" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="ApplyAll" xml:space="preserve">
+    <value>انتخاب همه</value>
+  </data>
 </root>
