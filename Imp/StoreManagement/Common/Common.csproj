@@ -19,6 +19,9 @@
 		<Reference Include="SystemGroup.Framework.Concepts">
 		  <HintPath>..\..\..\..\Bin\SystemGroup.Framework.Concepts.dll</HintPath>
 		</Reference>
+		<Reference Include="SystemGroup.General.PartyManagement.Common">
+		  <HintPath>..\..\..\..\Bin\SystemGroup.General.PartyManagement.Common.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 
 	<ItemGroup>
