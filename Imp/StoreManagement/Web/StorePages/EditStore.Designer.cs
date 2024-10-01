@@ -7,6 +7,7 @@ using System.Web.UI;
 using SystemGroup.Training.StoreManagement.Common;
 using SystemGroup.Web.UI.Bindings;
 using SystemGroup.Web.UI.Controls;
+using SystemGroup.Web.UI.Localization;
 using SystemGroup.Web.UI.Views;
 
 namespace SystemGroup.Training.StoreManagement.Web.StorePages
@@ -21,6 +22,8 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
 
         SgTextBox txtCode;
         SgTextBox txtName;
+        SgGrid grdParts;
+        SgHiddenField hiddenFieldPartIdSelection;
 
         #endregion
 
@@ -58,6 +61,7 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
 
             var grid = fieldSet.Add<GridView<PartStore>>()
                 .ID("GridPartStores")
+                .RealizedIn(() => grdParts)
                 .OnRealized((o) =>
                 {
                     ((Control)o).ClientIDMode = ClientIDMode.Predictable;
@@ -69,7 +73,14 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
                 .GridType(SgGridType.ClientSide)
                 .ValidationGroup(VgGrid)
                 .DataSourceID(".PartStores")
-                
+                .OnCommand(grdPart_onCommand)
+                ;
+
+            
+
+            grid.AddCommand("AddMultiple")
+                .TextKey("Labels_AddMultipleParts")
+                .ImageUrl("~/Training/StoreManagement/Icons/List.gif")
                 ;
 
             var column = grid.Columns.AddSelector()
@@ -96,6 +107,7 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
             column.Add<RequiredFieldValidatorView>()
                 .ControlToValidate("sltPart")
                 .ValidationGroup(VgGrid)
+                .ErrorMessageKey("Messages_SelectPart")
                 ;
 
             grid.Columns.AddText()
@@ -103,6 +115,19 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
                 .HeaderText("PartStore_PartCode")
                 .AllowEdit(false)
                 ;
+
+            var updHidden = GetMainPlaceHolder().Add<UpdatePanelView>();
+            updHidden.Add<HiddenFieldView>()
+                .ID("hiddenFieldPartIdSelection")
+                .RealizedIn(() => hiddenFieldPartIdSelection)
+                .OnRealized(o => ((Control)o).ClientIDMode = ClientIDMode.Static)
+                .ValueType(typeof(String));
+
+            updHidden.Add<ButtonView>()
+                .ID("btnPartSelection")
+                .OnRealized(o => ((Control)o).ClientIDMode = ClientIDMode.Static)
+                .OnClick(btnPartSelection_onClick)
+                .Style((s) => s.Display("none"));
 
         }
 
