@@ -22,7 +22,7 @@
                         <sg:SgTableCell >
                             <sg:SgEntityList ID="elParts" runat="server" AllowMultiRowSelection="true"
                                 ComponentName="SystemGroup.Training.StoreManagement" EntityName="Part" 
-                                
+                                AllowGrouping="false"
                                 
                                 ViewName="AvailablePartForStore" >
                                 <ViewParameters>

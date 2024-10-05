@@ -21,27 +21,25 @@ namespace SystemGroup.Training.StoreManagement.Business
         public void DeleteExtension(StoreKeeper extensionEntity, Party referenceEntity)
         {
             
-            if (FetchVouchersOfStoreKeeper(extensionEntity.ID).Any())
+            if (FetchInventoryVouchersByStoreKeeper(extensionEntity.ID).Any())
             {
                 throw this.CreateException("Messages_StoreKeeperExistsInVoucher");
             }
             Delete(extensionEntity);
-            //throw new NotImplementedException();
         }
 
         public void SaveExtension(ref StoreKeeper extensionEntity, Party referenceEntity)
         {
             extensionEntity.PartyRef = referenceEntity.ID;
             Save(ref extensionEntity);
-            //throw new NotImplementedException();
         }
 
         
 
-        public virtual IQueryable<InventoryVoucher> FetchVouchersOfStoreKeeper(long id)//TODO change method name
+        public virtual IQueryable<InventoryVoucher> FetchInventoryVouchersByStoreKeeper(long storeKeeperID)
         {
             return ServiceFactory.Create<IInventoryVoucherBusiness>().FetchAll()
-                .Where(i=>i.StoreKeeperRef == id);
+                .Where(i=>i.StoreKeeperRef == storeKeeperID);
         }
 
        

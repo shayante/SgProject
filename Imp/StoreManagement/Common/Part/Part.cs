@@ -27,7 +27,7 @@ namespace SystemGroup.Training.StoreManagement.Common
             columns.Add(new ReferenceColumnInfo("UnitRef", "Part_UnitRef"));
         }
 
-
+        
         #endregion
     }
 }

@@ -11,6 +11,6 @@ namespace SystemGroup.Training.StoreManagement.Common
         
         new IQueryable<StoreKeeper> FetchAll();
 
-        IQueryable<InventoryVoucher> FetchVouchersOfStoreKeeper(long id);
+        IQueryable<InventoryVoucher> FetchInventoryVouchersByStoreKeeper(long id);
     }
 }

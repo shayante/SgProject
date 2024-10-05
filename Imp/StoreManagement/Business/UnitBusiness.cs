@@ -13,12 +13,12 @@ namespace SystemGroup.Training.StoreManagement.Business
     [Service]
     public class UnitBusiness : BusinessBase<Unit>, IUnitBusiness
     {
-        //TODO check duplicate and foreign key in database
+        
         protected override void OnSavingRecord(Unit record, List<Pair<Entity, EntityActionType>> changeSet)
         {
             
 
-            if (FetchAll().Select(u => u.Title).Any(title => title == record.Title))
+            if (FetchAll().Where(u => u.ID != record.ID).Select(u => u.Title).Any(title => title == record.Title))
             {
                 throw this.CreateException("Messages_UnitTitleDuplicated");
             }

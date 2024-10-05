@@ -25,12 +25,19 @@ namespace SystemGroup.Training.StoreManagement.Web.UnitPages
         private void AddControls()
         {
             var fieldSet = GetMainPlaceHolder().Add<FieldSetView>();
-            var layout = fieldSet.Add<DynamicFieldLayoutView>().NumberOfColumns(3);
+            var layout = fieldSet.Add<DynamicFieldLayoutView>()
+                ;
+                //.NumberOfColumns(1)
+                //.LabelCellWidth(150)
+                //.InputCellWidth(200)
+                //.ValidationCellWidth(30);
 
             var row = layout.AddRow();
-            row.SetLabelByKey("Unit_Title", true);
+            row.SetLabelByKey("Training.StoreManagement:Unit_Title", true);
             row.SetInput<TextBoxView>()
+                //.Width(180)
                 .RealizedIn(() => txtTitle);
+            
             row.SetRequiredValidator();
 
             

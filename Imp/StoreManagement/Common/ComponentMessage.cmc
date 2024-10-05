@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SgComponent Name="SystemGroup.Training.StoreManagement" xmlns="http://www.Systemgroup.net/Component/Initializer">
+<Messages>
+	<!--	Unit	-->
+	<Message Name="UnitTitleShouldBeUnique" DefaultValue="عنوان واحد سنجش تکراری است." />
+	
+	<!--	Part	-->
+	<Message Name="PartCodeShouldBeUnique" DefaultValue="کد کالا تکراری است." />
+	<Message Name="PartTitleShouldBeUnique" DefaultValue="عنوان کالا تکراری است" />
+	<Message Name="InvalidUnitForSavingPart" DefaultValue="خطا در ذخیره سازی کالا: واحد سنجش معتبر نیست" />
+	<Message Name="UnitIsUsedInPart" DefaultValue="ازین واحد سنجش در کالا استفاده شده است و نمیتوانید آن را حذف کنید." />
+	
+	<!--	Store	-->
+	<Message Name="StoreCodeShouldBeUnique" DefaultValue="کد انبار تکراری است." />
+	<Message Name="StoreNameShouldBeUnique" DefaultValue="نام انبار تکراری است/" />
+	
+	<!--	PartSotre	-->
+	<Message Name="InvalidPartForSavingInPartStore" DefaultValue="خطا در ذخیره سازی کالا-انبار: کالا نامعتبر است." />
+	<Message Name="PartIsUsedInStore" DefaultValue="کالا در انبار ثبت شده است و نمیتوانید آن را حذف کنید" />
+	<Message Name="InvalidStoreForSavingInPartStore" DefaultValue="خطا در ذخیره سازی کالا-انبار: انبار نامعتبر است." />
+	<Message Name="StoreHasPart" DefaultValue="در انبار کالا ثبت شده است نمیتوانید آن را حذف کنید." />
+	<Message Name="PartIsAddedToThisStore" DefaultValue="کالا قبلا در انبار ثبت شده است." />
+	
+	<!--	StoreKeeper		-->
+	<Message Name="ThisPartyIsStoreKeeperAlready" DefaultValue="شخص قبلا به عنوان انبار دار ذخیره شده است." />
+	<Message Name="InvalidPartyToSaveAsStoreKeeper" DefaultValue="خطا در ذخیره سازی انبار دار: شخص نامعتبر است." />
+	<Message Name="PartyIsStoreKeeper" DefaultValue="شخص به عنوان انبار دار ذخیره شده است. نمیتوانید آن را حذف کنید." />
+	
+	<!--	InventoryVoucher	-->
+	<Message Name="InvalidStoreKeeperForSavingInInventoryVoucher" DefaultValue="خطا در ذخیره سازی سند انبار: انباردار نامعتبر است." />
+	<Message Name="InventoryVoucherIsSubmittedForStoreKeeper" DefaultValue="برای این انبار دار سند انبار ثبت شده است و نمیتوانید آن را حذف کنید." />
+	<Message Name="InvalidStoreForSavingInInventoryVoucher" DefaultValue="خطا در ذخیره سازی سند انبار: انبار نامعتبر است." />
+	<Message Name="InventoryVoucherIsSubmittedForStore" DefaultValue="برای انبار سند ثبت شده است و نمیتوانید آن را حذف کنید." />
+	
+	<!--	InventoryVoucherItem	-->
+	<Message Name="ItemIsExistsInInventoryVoucher" DefaultValue="نمیتوانید کالای تکراری در سند انبار ثبت کنید." />
+	<Message Name="InvalidInventoryVoucherForSavingInInventoryVoucherItem" DefaultValue="" />
+	<Message Name="InventoryVoucherHasItem" DefaultValue="در این سند انبار قلم وجود دارد ونمیتوانید آن را حذف کنید." />
+	<Message Name="InvalidPartForSavingInInventoryVoucherItem" DefaultValue="خطا در ذخیره قلم سند انبار: کالا نامعتبر است." />
+	<Message Name="PartIsNotatedInInventoryVoucherItem" DefaultValue="کالا در سند انبار ثبت شده است نمیتوانید آن را حذف کنید." />
+	
+	
+</Messages>
+<ExceptionMappings>
+
+	<!--	Unit	-->
+	<Mapping MessageName="UnitTitleShouldBeUnique">
+		<Keywords>
+			<Keyword Name="IX_TRN3_Unit_Title" />
+		</Keywords>
+	</Mapping>
+	
+	<!--	Part	-->
+	<Mapping MessageName="PartCodeShouldBeUnique">
+		<Keywords>
+			<Keyword Name="IX_TRN3_Part_Code" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="PartTitleShouldBeUnique">
+		<Keywords>
+			<Keyword Name="IX_TRN3_Part_Title" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidUnitForSavingPart">
+		<Keywords>
+			<Keyword Name="FK_TRN3_Part_UnitRef" />
+			<Keyword Name="Insert" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidUnitForSavingPart">
+		<Keywords>
+			<Keyword Name="FK_TRN3_Part_UnitRef" />
+			<Keyword Name="Update" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="UnitIsUsedInPart">
+		<Keywords>
+			<Keyword Name="FK_TRN3_Part_UnitRef" />
+			<Keyword Name="Delete" />
+		</Keywords>
+	</Mapping>
+
+	<!--	Store	-->
+	<Mapping MessageName="StoreCodeShouldBeUnique">
+		<Keywords>
+			<Keyword Name="IX_TRN3_Store_Code" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="StoreNameShouldBeUnique">
+		<Keywords>
+			<Keyword Name="IX_TRN3_StoreName" />
+		</Keywords>
+	</Mapping>
+	
+	<!--	PartSotre	-->
+	<Mapping MessageName="InvalidPartForSavingInPartStore">
+		<Keywords>
+			<Keyword Name="FK_TRN3_PartStore_PartRef" />
+			<Keyword Name="Insert" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidPartForSavingInPartStore">
+		<Keywords>
+			<Keyword Name="FK_TRN3_PartStore_PartRef" />
+			<Keyword Name="Update" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="PartIsUsedInStore">
+		<Keywords>
+			<Keyword Name="FK_TRN3_PartStore_PartRef" />
+			<Keyword Name="Delete" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidStoreForSavingInPartStore">
+		<Keywords>
+			<Keyword Name="FK_TRN3_PartStore_StoreRef" />
+			<Keyword Name="Insert" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidStoreForSavingInPartStore">
+		<Keywords>
+			<Keyword Name="FK_TRN3_PartStore_StoreRef" />
+			<Keyword Name="Update" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="StoreHasPart">
+		<Keywords>
+			<Keyword Name="FK_TRN3_PartStore_StoreRef" />
+			<Keyword Name="Delete" />
+		</Keywords>
+	</Mapping>
+
+	<Mapping MessageName="PartIsAddedToThisStore">
+		<Keywords>
+			<Keyword Name="IX_TRN3_PartStore_PartRef_StoreRef" />
+		</Keywords>
+	</Mapping>
+	
+	<!--	StoreKeeper		-->
+	<Mapping MessageName="ThisPartyIsStoreKeeperAlready">
+		<Keywords>
+			<Keyword Name="IX_TRN3_StoreKeeper_PartyRef" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidPartyToSaveAsStoreKeeper">
+		<Keywords>
+			<Keyword Name="FK_TRN3_StoreKeeper_PartyRef" />
+			<Keyword Name="Insert" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidPartyToSaveAsStoreKeeper">
+		<Keywords>
+			<Keyword Name="FK_TRN3_StoreKeeper_PartyRef" />
+			<Keyword Name="Update" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="PartyIsStoreKeeper">
+		<Keywords>
+			<Keyword Name="FK_TRN3_StoreKeeper_PartyRef" />
+			<Keyword Name="Delete" />
+		</Keywords>
+	</Mapping>
+	
+	<!--	InventoryVoucher	-->
+	<Mapping MessageName="InvalidStoreKeeperForSavingInInventoryVoucher">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucher_StoreKeeperRef" />
+			<Keyword Name="Insert" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidStoreKeeperForSavingInInventoryVoucher">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucher_StoreKeeperRef" />
+			<Keyword Name="Update" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InventoryVoucherIsSubmittedForStoreKeeper">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucher_StoreKeeperRef" />
+			<Keyword Name="Delete" />
+		</Keywords>
+	</Mapping>
+
+	<Mapping MessageName="InvalidStoreForSavingInInventoryVoucher">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucher_StoreRef" />
+			<Keyword Name="Insert" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidStoreForSavingInInventoryVoucher">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucher_StoreRef" />
+			<Keyword Name="Update" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InventoryVoucherIsSubmittedForStore">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucher_StoreRef" />
+			<Keyword Name="Delete" />
+		</Keywords>
+	</Mapping>
+
+	<!--	InventoryVoucherItem	-->
+	<Mapping MessageName="ItemIsExistsInInventoryVoucher">
+		<Keywords>
+			<Keyword Name="IX_TRN3_InventoryVoucherItem_InventoryVoucherRef_PartRef" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidInventoryVoucherForSavingInInventoryVoucherItem">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucherItem_InventoryVoucherRef" />
+			<Keyword Name="Insert" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidInventoryVoucherForSavingInInventoryVoucherItem">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucherItem_InventoryVoucherRef" />
+			<Keyword Name="Update" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InventoryVoucherHasItem">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucherItem_InventoryVoucherRef" />
+			<Keyword Name="Delete" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidPartForSavingInInventoryVoucherItem">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucherItem_PartRef" />
+			<Keyword Name="Insert" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="InvalidPartForSavingInInventoryVoucherItem">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucherItem_PartRef" />
+			<Keyword Name="Update" />
+		</Keywords>
+	</Mapping>
+	<Mapping MessageName="PartIsNotatedInInventoryVoucherItem">
+		<Keywords>
+			<Keyword Name="FK_TRN3_InventoryVoucherItem_PartRef" />
+			<Keyword Name="Delete" />
+		</Keywords>
+	</Mapping>
+	
+</ExceptionMappings>
+</SgComponent>

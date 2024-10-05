@@ -30,7 +30,7 @@ namespace SystemGroup.Training.StoreManagement.Common
         {
             base.GetColumns(columns);
 
-            columns.Add(new ReferenceColumnInfo("PartyRef", "_"));//TODO add key 
+            columns.Add(new ReferenceColumnInfo("PartyRef", "StoreKeeper_PartyRef"));
         }
 
         #endregion

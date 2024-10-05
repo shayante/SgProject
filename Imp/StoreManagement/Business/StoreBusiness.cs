@@ -13,15 +13,15 @@ namespace SystemGroup.Training.StoreManagement.Business
     [Service]
     public class StoreBusiness : BusinessBase<Store>, IStoreBusiness
     {
-        //TODO check duplicate and foreign key in database
+        
         protected override void OnSavingRecord(Store record, List<Pair<Entity, EntityActionType>> changeSet)
         {
-            if (FetchAll().Select(s => s.Code).Any(code => code == record.Code))
+            if (FetchAll().Where(s => s.ID != record.ID).Select(s => s.Code).Any(code => code == record.Code))
             {
                 throw this.CreateException("Messages_StoreCodeDuplicated");
             }
 
-            if (FetchAll().Select(s => s.Name).Any(name => name == record.Name))
+            if (FetchAll().Where(s => s.ID != record.ID).Select(s => s.Name).Any(name => name == record.Name))
             {
                 throw this.CreateException("Messages_StoreNameDuplicated");
             }

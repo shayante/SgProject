@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using SystemGroup.Framework.Frontend.Extensions;
 using SystemGroup.Framework.Service;
 using SystemGroup.General.PartyManagement.Common;
 using SystemGroup.Training.StoreManagement.Common;
@@ -12,27 +11,12 @@ namespace SystemGroup.Training.StoreManagement.Web.Extension
     {
         private static IStoreKeeperBusiness SotreKeeperBiz => ServiceFactory.Create<IStoreKeeperBusiness>();
 
-        //private StoreKeeper CurrentExtensionEntity => SotreKeeperBiz
-        //    .FetchAll()
-        //    .FirstOrDefault(sk => sk.PartyRef == Page.CurrentEntity.ID)
-        //    ;
+        private StoreKeeper CurrentExtensionEntity => SotreKeeperBiz
+            .FetchAll()
+            .FirstOrDefault(sk => sk.PartyRef == Page.CurrentEntity.ID)
+            ;
 
-        //TODO remove view state and fetch every time
-        private StoreKeeper CurrentExtensionEntity
-        {
-            get
-            {
-                if (ViewState["CurrentExtensionEntity"] == null)
-                {
-                    ViewState["CurrentExtensionEntity"] = SotreKeeperBiz
-                        .FetchAll()
-                        .FirstOrDefault(sk => sk.PartyRef == Page.CurrentEntity.ID);
-                }
-
-                return (StoreKeeper)ViewState["CurrentExtensionEntity"];
-            }
-
-        }
+        
 
         protected override void OnInit(EventArgs e)
         {
@@ -51,12 +35,12 @@ namespace SystemGroup.Training.StoreManagement.Web.Extension
 
         public void Page_EntityLoaded(object sender, EventArgs e)
         {
-            //var current = CurrentExtensionEntity;
+            var current = CurrentExtensionEntity;
 
-            if (CurrentExtensionEntity != null)
+            if (current != null)
             {
-                chkStoreKeeper.Checked = CurrentExtensionEntity != null;
-                chkStoreKeeper.Enabled = !SotreKeeperBiz.FetchVouchersOFStoreKeeper(current.ID).Any();
+                chkStoreKeeper.Checked = current != null;
+                chkStoreKeeper.Enabled = !SotreKeeperBiz.FetchInventoryVouchersByStoreKeeper(current.ID).Any();
                 chkStoreKeeper.DataBind();
             }
             else
@@ -67,25 +51,25 @@ namespace SystemGroup.Training.StoreManagement.Web.Extension
 
         public void Page_EntitySaving(object sender, EntitySavingEventArgs e)
         {
-            //var current = CurrentExtensionEntity();
+            var current = CurrentExtensionEntity;
             var isStoreKeeper = chkStoreKeeper.Checked;
             if (isStoreKeeper)
             {
-                if (CurrentExtensionEntity == null)
+                if (current == null)
                 {
                     e.ExtensionEntities["StoreKeeper"] = new StoreKeeper();
                 }
                 else
                 {
-                    e.ExtensionEntities["StoreKeeper"] = CurrentExtensionEntity;
+                    e.ExtensionEntities["StoreKeeper"] = current;
                 }
                 
             }
             else
             {
-                if (CurrentExtensionEntity != null)
+                if (current != null)
                 {
-                    e.DeletedExtensionEntities["StoreKeeper"] = CurrentExtensionEntity;
+                    e.DeletedExtensionEntities["StoreKeeper"] = current;
                 }
 
 
@@ -94,9 +78,10 @@ namespace SystemGroup.Training.StoreManagement.Web.Extension
 
         public void Page_EntityDeleting(object sender, EntityDeletingEventArgs e)
         {
-            if (CurrentExtensionEntity != null)
+            var current = CurrentExtensionEntity;
+            if (current != null)
             {
-                e.ExtensionEntities["StoreKeeper"] = CurrentExtensionEntity;
+                e.ExtensionEntities["StoreKeeper"] = current;
             }
 
         }

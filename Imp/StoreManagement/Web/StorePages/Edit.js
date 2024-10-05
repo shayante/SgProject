@@ -1,7 +1,7 @@
 ﻿function sltPart_onSelectIndexChanged(sender, args) {
-    var grid = $find("mainContainer_GridPartStores");
-    var temp = grid.get_tempEntity();
-    if (temp != null) {
+    const grid = $find("mainContainer_GridPartStores");
+    const temp = grid.get_tempEntity();
+    if (temp) {
         
         Sys.Observer.setValue(temp, "PartTitle", sender.getSelectedDataProperty("Title"));
         Sys.Observer.setValue(temp, "PartCode", sender.getSelectedDataProperty("Code"));
@@ -10,12 +10,10 @@
 }
 
 function sltPart_onItemRequesting(sender, args) {
-    var grid = $find("mainContainer_GridPartStores");
-    var selectedItems = grid.get_dataSourceObject().get_entityList().map(function (ps) {
-        return ps.PartRef;
-    });
+    const grid = $find("mainContainer_GridPartStores");
+    const selectedItems = grid.get_dataSourceObject().get_entityList().map(ps => ps.PartRef);
 
-    var editIndex = grid.get_editIndex();
+    const editIndex = grid.get_editIndex();
 
 
     if (editIndex > -1) {
@@ -28,9 +26,9 @@ function sltPart_onItemRequesting(sender, args) {
 }
 
 function PartSelection_OnClientClose(sender, args) {
-    var result = sender.get_returnValue();
-    if (result != null) {
-        var hiddenFieldPartIdSelection = $find("hiddenFieldPartIdSelection");
+    const result = sender.get_returnValue();
+    if (result) {
+        const hiddenFieldPartIdSelection = $find("hiddenFieldPartIdSelection");
         hiddenFieldPartIdSelection.set_value(result);
         setTimeout("$get('btnPartSelection').click()", 1);
     }
@@ -38,12 +36,10 @@ function PartSelection_OnClientClose(sender, args) {
 
 function btnOK_ClientClick(ev) {
     SgCancelBrowserEvent(ev);
-    var win = Sg.Window.getCurrent();
-    win.close(ev);
+    Sg.Window.getCurrent().close(ev);
 }
 
 function btnCancel_ClientClick(ev) {
-    var win = Sg.Window.getCurrent();
     SgCancelBrowserEvent(ev);
-    win.close(null);
+    Sg.Window.getCurrent().close(null);
 }
