@@ -13,6 +13,7 @@ namespace SystemGroup.Training.StoreManagement.Business
     [Service]
     public class StoreBusiness : BusinessBase<Store>, IStoreBusiness
     {
+        //TODO check duplicate and foreign key in database
         protected override void OnSavingRecord(Store record, List<Pair<Entity, EntityActionType>> changeSet)
         {
             if (FetchAll().Select(s => s.Code).Any(code => code == record.Code))

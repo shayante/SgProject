@@ -38,7 +38,7 @@ namespace SystemGroup.Training.StoreManagement.Business
 
         
 
-        public virtual IQueryable<InventoryVoucher> FetchVouchersOfStoreKeeper(long id)
+        public virtual IQueryable<InventoryVoucher> FetchVouchersOfStoreKeeper(long id)//TODO change method name
         {
             return ServiceFactory.Create<IInventoryVoucherBusiness>().FetchAll()
                 .Where(i=>i.StoreKeeperRef == id);

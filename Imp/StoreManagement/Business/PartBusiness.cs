@@ -13,12 +13,13 @@ namespace SystemGroup.Training.StoreManagement.Business
     [Service]
     public class PartBusiness : BusinessBase<Part>, IPartBusiness
     {
-        public virtual IQueryable<Part> FetchPartsAvailableForStore(long[] igonreIDs)
+        public virtual IQueryable<Part> FetchPartsAvailableForStore(long[] igonreIDs)//TODO change method name
         {
             return FetchAll().Where(p => !igonreIDs.Contains(p.ID));
         }
 
 
+        //TODO check duplicate and foreign key in database
         protected override void OnSavingRecord(Part record, List<Pair<Entity, EntityActionType>> changeSet)
         {
             if (FetchAll().Select(p => p.Code).Any(code => code == record.Code))
