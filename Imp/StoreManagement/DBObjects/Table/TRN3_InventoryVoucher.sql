@@ -50,12 +50,12 @@ GO
 --<< FOREIGNKEYS DEFINITION >>--
 
 If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucher_Creator')
-ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_Creator] FOREIGN KEY([InventoryVoucherID])
+ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_Creator] FOREIGN KEY([Creator])
 REFERENCES [SYS3].[User] ([UserID])
 
 GO
 If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucher_LastModifier')
-ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_LastModifier] FOREIGN KEY([InventoryVoucherID])
+ALTER TABLE [TRN3].[InventoryVoucher]  ADD  CONSTRAINT [FK_TRN3_InventoryVoucher_LastModifier] FOREIGN KEY([LastModifier])
 REFERENCES [SYS3].[User] ([UserID])
 
 GO
