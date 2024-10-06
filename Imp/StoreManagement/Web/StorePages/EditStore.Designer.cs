@@ -32,20 +32,17 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
         private void AddControls()
         {
             var fieldSet = GetMainPlaceHolder().Add<FieldSetView>()
-                .OnRealized((o) =>
-                {
-                    ((Control)o).ClientIDMode = ClientIDMode.Static;
-                });
+                .OnRealized((o) => ((Control)o).ClientIDMode = ClientIDMode.Static);
             var layout = fieldSet.Add<DynamicFieldLayoutView>();
 
             var row = layout.AddRow();
-            row.SetLabelByKey("Store_Code", true);
+            row.SetLabelByKey("Training.StoreManagement:Store_Code", true);
             row.SetInput<TextBoxView>().RealizedIn(() => txtCode);
             row.SetRequiredValidator();
 
 
             row = layout.AddRow();
-            row.SetLabelByKey("Store_Name", true);
+            row.SetLabelByKey("Training.StoreManagement:Store_Name", true);
             row.SetInput<TextBoxView>().RealizedIn(() => txtName);
             row.SetRequiredValidator();
 
