@@ -117,25 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ConfirmVoucher" xml:space="preserve">
-    <value>تأیید</value>
+  <data name="PartTitle" xml:space="preserve">
+    <value>عنوان کالا</value>
   </data>
-  <data name="InvalidateVoucher" xml:space="preserve">
-    <value>ابطال</value>
-  </data>
-  <data name="AddUnit" xml:space="preserve">
-    <value>تعریف واحد سنجش</value>
-  </data>
-  <data name="AddPart" xml:space="preserve">
-    <value>تعریف کالا</value>
-  </data>
-  <data name="AddStore" xml:space="preserve">
-    <value>تعریف انبار</value>
-  </data>
-  <data name="AddInventoryVoucher" xml:space="preserve">
-    <value>ثبت سند انبار</value>
-  </data>
-  <data name="Training" xml:space="preserve">
-    <value>منوی تستی</value>
+  <data name="PartCode" xml:space="preserve">
+    <value>کد کالا</value>
   </data>
 </root>

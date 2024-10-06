@@ -120,4 +120,7 @@
   <data name="StoreKeeper" xml:space="preserve">
     <value>انباردار</value>
   </data>
+  <data name="PartyRef" xml:space="preserve">
+    <value>شخص/شرکت</value>
+  </data>
 </root>

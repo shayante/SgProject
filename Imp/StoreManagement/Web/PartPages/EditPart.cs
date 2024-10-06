@@ -9,12 +9,12 @@ namespace SystemGroup.Training.StoreManagement.Web.PartPages
     {
         protected override void OnCreateBindings(SgDataSourceEditorBindingContext<Part> context)
         {
-            throw new NotImplementedException();
+            BindControls(context);
         }
 
         protected override void OnCreateViews()
         {
-            throw new NotImplementedException();
+            AddControls();
         }
     }
 }

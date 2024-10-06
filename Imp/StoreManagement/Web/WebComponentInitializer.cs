@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI.WebControls.WebParts;
+﻿using System.Collections.Generic;
 using SystemGroup.Framework.Security;
 using SystemGroup.Framework.Service;
+using SystemGroup.General.PartyManagement.Common;
 using SystemGroup.Training.StoreManagement.Common;
 using SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages;
 using SystemGroup.Training.StoreManagement.Web.PartPages;
@@ -156,23 +153,28 @@ namespace SystemGroup.Training.StoreManagement.Web
 
         #region Methods
 
+        protected override IEnumerable<PageExtension> GetExtensions()
+        {
+            yield return new EditorPageExtension<Party>("Training.StoreManagement:StoreKeeper_StoreKeeper", "/Extension/StoreKeeperExtension.ascx");
+        }
+
         public override List<ComponentLink> RegisterLinks()
         {
             return new List<ComponentLink>
             {
-                new ComponentLink("Training", "Labels_Training".GetKey(), null, null, 0, new ComponentLink[] {
+                new ComponentLink("Training", "Labels_Training", null, null, 0, new ComponentLink[] {
                     new ComponentLink("Lists", "s:Labels_Lists", null, null, 1, new ComponentLink[] {
 
-                        new ComponentLink("InventoryVoucherList","InventoryVoucher_InventoryVoucher".GetKey(),null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=InventoryVoucher",1),
-                        new ComponentLink("StoreList","Store_Store".GetKey(),null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Store",2),
-                        new ComponentLink("PartList","Part_Part".GetKey(),null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Part",3),
-                        new ComponentLink("UnitList","Unit_Unit".GetKey(),null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Unit",4),
+                        new ComponentLink("InventoryVoucherList","InventoryVoucher_InventoryVoucher",null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=InventoryVoucher",1),
+                        new ComponentLink("StoreList","Store_Store",null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Store",2),
+                        new ComponentLink("PartList","Part_Part",null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Part",3),
+                        new ComponentLink("UnitList","Unit_Unit",null,"~/List.aspx?ComponentName=SystemGroup.Training.StoreManagement&EntityName=Unit",4),
                     
                     }),
-                    new ComponentLink("AddInventoryVoucher", "Labels_AddInventoryVoucher".GetKey(), null,SecurityKey.Of("Training.StoreManagement.InventoryVoucher.New"), typeof(EditInventoryVoucher), 1),
-                    new ComponentLink("AddStore", "Labels_AddStore".GetKey(), null,SecurityKey.Of("Training.StoreManagement.Store.New"), typeof(EditStore), 2),
-                    new ComponentLink("AddPart", "Labels_AddPart".GetKey(), null,SecurityKey.Of("Training.StoreManagement.Part.New"), typeof(EditPart), 3),
-                    new ComponentLink("AddUnit", "Labels_AddUnit".GetKey(), null,SecurityKey.Of("Training.StoreManagement.Unit.New"), typeof(EditUnit), 4),
+                    new ComponentLink("AddInventoryVoucher", "Labels_AddInventoryVoucher", null,SecurityKey.Of("Training.StoreManagement.InventoryVoucher.New"), typeof(EditInventoryVoucher), 1),
+                    new ComponentLink("AddStore", "Labels_AddStore", null,SecurityKey.Of("Training.StoreManagement.Store.New"), typeof(EditStore), 2),
+                    new ComponentLink("AddPart", "Labels_AddPart", null,SecurityKey.Of("Training.StoreManagement.Part.New"), typeof(EditPart), 3),
+                    new ComponentLink("AddUnit", "Labels_AddUnit", null,SecurityKey.Of("Training.StoreManagement.Unit.New"), typeof(EditUnit), 4),
                 })
             };
         }

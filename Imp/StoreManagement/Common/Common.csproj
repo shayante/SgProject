@@ -19,9 +19,17 @@
 		<Reference Include="SystemGroup.Framework.Concepts">
 		  <HintPath>..\..\..\..\Bin\SystemGroup.Framework.Concepts.dll</HintPath>
 		</Reference>
+		<Reference Include="SystemGroup.General.PartyManagement.Common">
+		  <HintPath>..\..\..\..\Bin\SystemGroup.General.PartyManagement.Common.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="ComponentMessage.cmc">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <Generator>SgComponentInitGenerator</Generator>
+	    <LastGenOutput>ComponentMessage.designer.cs</LastGenOutput>
+	  </None>
 	  <None Update="DataModel.dbml">
 	    <Generator>SgLinqToSQLGenerator</Generator>
 	    <LastGenOutput>DataModel.designer.cs</LastGenOutput>
@@ -37,6 +45,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="ComponentMessage.designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>ComponentMessage.cmc</DependentUpon>
+	  </Compile>
 	  <Compile Update="DataModel.designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
