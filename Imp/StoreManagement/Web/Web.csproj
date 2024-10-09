@@ -10,12 +10,14 @@
 
 	<ItemGroup>
 	  <None Remove="Extension\StoreKeeperExtension.ascx" />
+	  <None Remove="InventoryVoucherPages\Edit.js" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Dialog\PartSelectionDialog.aspx" />
+		<EmbeddedResource Include="Dialog\PartSelectionDialog.ascx" />
 		<EmbeddedResource Include="Icons\AddMultiple.png" />
 		<EmbeddedResource Include="Icons\List.gif" />
+		<EmbeddedResource Include="InventoryVoucherPages\Edit.js" />
 		<EmbeddedResource Include="StorePages\EditStore.cs" />
 		<EmbeddedResource Include="Extension\StoreKeeperExtension.ascx" />
 		<EmbeddedResource Include="PartPages\EditPart.cs" />
