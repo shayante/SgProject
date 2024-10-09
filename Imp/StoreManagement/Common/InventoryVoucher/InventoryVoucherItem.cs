@@ -16,9 +16,17 @@ namespace SystemGroup.Training.StoreManagement.Common
     [Serializable]
     [DetailOf(typeof(InventoryVoucher), "InventoryVoucherRef")]
     [DataNature(DataNature.MasterData)]
-    [SearchFields()]
+    [SearchFields("Number")]
+    [JsonSerializationSettings(SerializeDecimalAsString = true)]
     partial class InventoryVoucherItem : Entity
     {
+        #region Properties
+
+        public string PartCode { get; set; }    
+        public string PartTitle { get; set; }
+        public string UnitTitle { get; set; }
+
+        #endregion
         #region Methods
 
         public override string GetEntityName()
