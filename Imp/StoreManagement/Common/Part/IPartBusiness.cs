@@ -13,5 +13,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 
         [EntityView("AvailablePartForStore", "_",typeof(PartProjection),"Title")]
         IQueryable<Part> FetchPartsExcept(long[] igonreIDs);
+
+
     }
 }

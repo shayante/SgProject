@@ -65,6 +65,8 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
 
         private void grdPart_onCommand(object sender, SgGridCommandEventArgs args)
         {
+
+            //TODO check command
             var selectedParts = dsPartStore.Entities.Select(ps => ps.PartRef).ToArray();
             var key = ShortTermSessionState.Current.Add(selectedParts);
             //SgWindow.ShowModalDialog(typeof(AddPartDialog),$"partsRefKey={key}", "PartSelectionDialog",this,null);

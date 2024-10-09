@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using SystemGroup.Framework.Business;
 using SystemGroup.Framework.Common;
-using SystemGroup.Framework.Lookup;
 using SystemGroup.Framework.MetaData;
 using SystemGroup.Framework.MetaData.Mapping;
-using SystemGroup.Framework.Service;
-using SystemGroup.Framework.StateManagement;
 
 namespace SystemGroup.Training.StoreManagement.Common
 {

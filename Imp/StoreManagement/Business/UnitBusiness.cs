@@ -14,16 +14,5 @@ namespace SystemGroup.Training.StoreManagement.Business
     public class UnitBusiness : BusinessBase<Unit>, IUnitBusiness
     {
         
-        protected override void OnSavingRecord(Unit record, List<Pair<Entity, EntityActionType>> changeSet)
-        {
-            
-
-            if (FetchAll().Where(u => u.ID != record.ID).Select(u => u.Title).Any(title => title == record.Title))
-            {
-                throw this.CreateException("Messages_UnitTitleDuplicated");
-            }
-
-            base.OnSavingRecord(record, changeSet);
-        }
     }
 }
