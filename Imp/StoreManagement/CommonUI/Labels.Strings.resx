@@ -156,4 +156,16 @@
   <data name="ApplyAll" xml:space="preserve">
     <value>انتخاب همه</value>
   </data>
+  <data name="ItemsCount" xml:space="preserve">
+    <value>تعداد اقلام</value>
+  </data>
+  <data name="QuantitesSum" xml:space="preserve">
+    <value>مجموع مقدار</value>
+  </data>
+  <data name="InventoryInfo" xml:space="preserve">
+    <value>اطلاعات سند انبار</value>
+  </data>
+  <data name="ItemGrid" xml:space="preserve">
+    <value>اطلاعات اقلام سند</value>
+  </data>
 </root>

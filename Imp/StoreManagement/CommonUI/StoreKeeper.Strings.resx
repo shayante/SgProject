@@ -123,4 +123,7 @@
   <data name="PartyRef" xml:space="preserve">
     <value>شخص/شرکت</value>
   </data>
+  <data name="FullName" xml:space="preserve">
+    <value>نام</value>
+  </data>
 </root>
