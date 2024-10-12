@@ -27,28 +27,26 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
             get { yield return ".InventoryVoucherItems"; }
         }
 
-        public override DetailLoadOptions EntityLoadOptions
-        {
-            get { return LoadOptions.With<InventoryVoucher>(i => i.InventoryVoucherItems); }
-        }
+        private ISgEntityDataSource dsItems => FindDataSource(ClientSideDetailDataSources.First());
 
-      
+        public override DetailLoadOptions EntityLoadOptions => LoadOptions.With<InventoryVoucher>(i => i.InventoryVoucherItems);
+
 
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
             ScriptManager.Scripts.Add(new ScriptReference("Edit.js"));
-        }
-
-        protected override void OnCreateViews()
-        {
-            AddControls();
+            dsItems.RegisterDecimalPropertySerializedAsString(nameof(InventoryVoucherItem.Quantity));
 
         }
 
         protected override void OnCreateBindings(SgDataSourceEditorBindingContext<InventoryVoucher> context)
         {
-            BindControls(context);
+            context.BindProperty(iv => iv.Number).To(nrgNumber);
+            context.BindValueTypeProperty(iv => iv.StoreRef).To(sltStore);
+            context.BindValueTypeProperty(iv => iv.Date).To(dpDate);
+            context.BindValueTypeProperty(iv => iv.Type).To(lkpType);
+            context.BindValueTypeProperty(iv => iv.StoreKeeperRef).To(sltStoreKeeper);
         }
 
 
@@ -56,7 +54,7 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
         {
             base.OnLoad(e);
 
-            var ds = FindDataSource(ClientSideDetailDataSources.First());
+            var ds = dsItems;
             ds.OnClientInsertedEntity = "ds_onInsertedEntity";
             ds.OnClientRemovedEntity = "ds_onRemovedEntity";
             ds.OnClientUpdatedEntity = "ds_onUpdatedEntity";
@@ -70,12 +68,13 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
             CurrentEntity?.FillItemsProperties();
 
 
-            var ds = FindDataSource(ClientSideDetailDataSources.First());
+            var ds = dsItems;
             sltStore.Enabled = ds.Entities.Count == 0;
 
             txtItemCount.Text =  ds.Entities.Count.ToString();
             txtQuantitySum.Text = ds.Entities.Cast<InventoryVoucherItem>().Sum(i => i.Quantity).ToString("N2");
 
+            
 
         }
 

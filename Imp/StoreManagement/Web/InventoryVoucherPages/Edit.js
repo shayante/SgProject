@@ -36,8 +36,6 @@ function sltStore_onSelectedIndexChanged(_sender, _args) {
 function ds_onInsertedEntity(sender, _args) {
     $find("sltStore").disable();
     updateItemSum(sender.get_entityList());
-    
-
 
 }
 
@@ -59,5 +57,5 @@ function ds_onUpdatedEntity(sender, _args) {
 function updateItemSum(list) {
 
     $find("txtItemsCount").set_textBoxValue(list.length);
-    $find("txtQuantitesSum").set_textBoxValue(list.map(i => i.Quantity).reduce((acc, item) => acc + parseFloat(item), 0));
+    $find("txtQuantitesSum").set_textBoxValue(list.map(i => i.Quantity).reduce((acc, item) => SgMath.add(acc,item), "0"));//TODO use sgMath
 }
