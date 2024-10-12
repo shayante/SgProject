@@ -50,7 +50,7 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
         protected override void OnEntityLoaded(object sender, EntityLoadedEventArgs e)
         {
             base.OnEntityLoaded(sender, e);
-            CurrentEntity.LoadParts();
+            CurrentEntity.FillPartStoreProperties();
         }
 
 

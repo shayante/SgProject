@@ -41,7 +41,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 
         }
 
-        public void LoadItems()
+        public void FillItemsProperties()
         {
             var partBiz = ServiceFactory.Create<IPartBusiness>();
             var inventoryBiz = ServiceFactory.Create<IInventoryVoucherBusiness>();

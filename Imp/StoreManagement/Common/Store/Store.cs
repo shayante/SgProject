@@ -34,7 +34,7 @@ namespace SystemGroup.Training.StoreManagement.Common
             columns.Add(new TextColumnInfo("Name", "Store_Name"));
         }
 
-        public void LoadParts()
+        public void FillPartStoreProperties()
         {
             var parts = ServiceFactory.Create<IPartBusiness>()
                 .FetchByID(PartStores.Select(ps => ps.PartRef).Distinct().ToArray())

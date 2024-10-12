@@ -61,14 +61,13 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
             ds.OnClientRemovedEntity = "ds_onRemovedEntity";
             ds.OnClientUpdatedEntity = "ds_onUpdatedEntity";
 
-
         }
 
 
         protected override void OnEntityLoaded(object sender, EntityLoadedEventArgs e)
         {
             base.OnEntityLoaded(sender, e);
-            CurrentEntity?.LoadItems();
+            CurrentEntity?.FillItemsProperties();
 
 
             var ds = FindDataSource(ClientSideDetailDataSources.First());
