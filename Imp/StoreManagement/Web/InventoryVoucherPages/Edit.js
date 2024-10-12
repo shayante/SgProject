@@ -59,3 +59,8 @@ function updateItemSum(list) {
     $find("txtItemsCount").set_textBoxValue(list.length);
     $find("txtQuantitesSum").set_textBoxValue(list.map(i => i.Quantity).reduce((acc, item) => SgMath.add(acc,item), "0"));//TODO use sgMath
 }
+
+function decQuntity_ValidationFunction(sender, args) {
+
+    args.IsValid = args.Value.length > 0 && SgMath.compare(args.Value, 0) > 0
+}

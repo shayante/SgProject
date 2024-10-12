@@ -25,7 +25,7 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
         private SgTextBox txtItemCount;
         private SgTextBox txtQuantitySum;
 
-        private void AddControls()
+        protected override void OnCreateViews()
         {
 
             var layout = GetMainPlaceHolder()
@@ -68,6 +68,7 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
             row.SetRequiredValidator();
 
             AddItemsGrid();
+
         }
 
         private void AddItemsGrid()
@@ -138,12 +139,13 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
                 .GroupSize(3)
                 .Precision(3)
                 .ID("decQuntity")
-                //.OnClientValueChanged("decQuntity_onValueChanged")
-                .CbValue("{binding Quantity}");
+                .CbValue("{binding Quantity}")
+                ;
 
-            columnEditor.Add<RangeValidatorView>()
-                .MinimumValue("1")
-                .MaximumValue("9999999")
+                        
+            columnEditor.Add<CustomValidatorView>()
+                .ValidateEmptyText(true)   
+                .ClientValidationFunction("decQuntity_ValidationFunction")
                 .ErrorMessageKey("Messages_QuntityIsOutOfRange")
                 .ControlToValidate("decQuntity")
                 .ValidationGroup(vgGrid)
@@ -152,7 +154,7 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
 
 
             var layout = fieldSet
-                .Add<FieldSetView>()
+                .Add<FieldSetView>()//Todo set width
                 .Add<DynamicFieldLayoutView>();
             var row = layout.AddRow();
             row.SetLabelByKey("Labels_ItemsCount");
@@ -172,16 +174,6 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
 
         }
 
-        private void BindControls(SgDataSourceEditorBindingContext<InventoryVoucher> context)
-        {
-
-            context.BindProperty(iv => iv.Number).To(nrgNumber);
-            context.BindValueTypeProperty(iv => iv.StoreRef).To(sltStore);
-            context.BindValueTypeProperty(iv => iv.Date).To(dpDate);
-            context.BindValueTypeProperty(iv => iv.Type).To(lkpType);
-            context.BindValueTypeProperty(iv => iv.StoreKeeperRef).To(sltStoreKeeper);
-
-        }
 
     }
 }
