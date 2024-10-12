@@ -132,4 +132,7 @@
   <data name="UnitTitle" xml:space="preserve">
     <value>واحد سنجش کالا</value>
   </data>
+  <data name="PartTitle1" xml:space="preserve">
+    <value>عنوان کالا</value>
+  </data>
 </root>

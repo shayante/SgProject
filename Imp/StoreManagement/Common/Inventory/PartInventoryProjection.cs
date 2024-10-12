@@ -18,7 +18,7 @@ namespace SystemGroup.Training.StoreManagement.Common
             var units = ServiceFactory.Create<IUnitBusiness>().FetchAll();
             return from inv in inputs
                    join part in parts on inv.PartRef equals part.ID
-                   join unit in units on inv.UnitRef equals unit.ID
+                   join unit in units on part.UnitRef equals unit.ID
                    select new
                    {
                        part.ID,
@@ -37,7 +37,6 @@ namespace SystemGroup.Training.StoreManagement.Common
             return ServiceFactory.Create<IPartBusiness>().FetchByID(ids).Select(p => new PartInventory
             {
                 PartRef = p.ID,
-                UnitRef = p.UnitRef,
             });
         }
         public override void GetColumns(List<ColumnInfo> columns)

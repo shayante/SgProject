@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SystemGroup.Framework.Business;
-using SystemGroup.Framework.Eventing;
+using SystemGroup.Framework.Common;
 using SystemGroup.Framework.Localization;
 using SystemGroup.Framework.Service;
+using SystemGroup.Framework.Utilities;
 using SystemGroup.Training.StoreManagement.Common;
 
 
@@ -12,43 +14,38 @@ namespace SystemGroup.Training.StoreManagement.Business
     public class InventoryVoucherBusiness : BusinessBase<InventoryVoucher>, IInventoryVoucherBusiness
     {
 
-        [SubscribeTo(typeof(IUnitBusiness), "UpdatingRecord", IsAdvisor = true)]
-        private void RestrictEditUnit(object sender, EntitySavingEventArgs<Unit> e)
-        {
-            var hasInventoryVoucher = (from item in FetchDetail<InventoryVoucherItem>()
-                                       join part in ServiceFactory.Create<IPartBusiness>().FetchAll() on item.PartRef equals part.ID
-                                       where part.UnitRef == (long)e.SavedEntity.GetPorpertyOriginalValue("UnitRef")
-                                       select part)
-                                       .Any();
 
-            if (hasInventoryVoucher)
-            {
-                throw this.CreateException("Messages_CannotEditUnitWhenUsedInInventoryVoucherItem");
-            }
+        protected override void OnRecordSaved(InventoryVoucher record, List<Pair<Entity, EntityActionType>> changeSet)
+        {
+            ControlInventory(record.StoreRef);
+            base.OnRecordSaved(record, changeSet);
+
         }
 
-
-        [SubscribeTo(typeof(IPartBusiness), "UpdatingRecord", IsAdvisor = true)]
-        private void RestrictEditPart(object sender, EntitySavingEventArgs<Part> e)
+        private void ControlInventory(long storeID)
         {
-            if (FetchDetail<InventoryVoucherItem>().Any(i => i.PartRef == e.SavedEntity.ID))
+            var inventory = ServiceFactory.Create<IInventoryService>().FetchPartInventoryByStore(storeID).Where(pi => pi.Quantity < 0).FirstOrDefault();
+            if (inventory != null)
             {
-                throw this.CreateException("Messages_CannotEditPartWhenUsedInInventoryVoucherItem");
+                var partBiz = ServiceFactory.Create<IPartBusiness>();
+                var unitBiz = ServiceFactory.Create<IUnitBusiness>();
+                var partID = inventory.PartRef;
+                var pu = (from part in partBiz.FetchAll()
+                          join unit in unitBiz.FetchAll() on part.UnitRef equals unit.ID
+                          where part.ID == partID
+                          select new
+                          {
+                              part,
+                              unit
+                          }).Single();
+
+                inventory.PartTitle = pu.part.Title;
+                inventory.UnitTitle = pu.unit.Title;
+                throw this.CreateException("Messages_InventoryCannotBeNegative", inventory.PartTitle, (inventory.Quantity * -1).ToString("N2"), inventory.UnitTitle);
             }
+            
         }
-
-
-
-        [SubscribeTo(typeof(IStoreBusiness), "UpdatingRecord", IsAdvisor = true)]
-        private void RestrictEditStore(object sender, EntitySavingEventArgs<Store> e)
-        {
-            if (FetchAll().Any(i => i.StoreRef == e.SavedEntity.ID))
-            {
-                throw this.CreateException("Messages_CannotEditStoreWhenUsedInInventoryVoucher");
-            }
-        }
-
-
+        
 
     }
 }

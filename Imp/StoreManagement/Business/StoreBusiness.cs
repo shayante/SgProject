@@ -13,6 +13,14 @@ namespace SystemGroup.Training.StoreManagement.Business
     [Service]
     public class StoreBusiness : BusinessBase<Store>, IStoreBusiness
     {
-        
+        protected override void OnUpdatingRecord(Store record, List<Pair<Entity, EntityActionType>> changeSet)
+        {
+            var inventoryVouchers = ServiceFactory.Create<IInventoryVoucherBusiness>().FetchAll();
+            if (inventoryVouchers.Any(i => i.StoreRef == record.ID))
+            {
+                throw this.CreateException("Messages_CannotEditStoreWhenUsedInInventoryVoucher");
+            }
+            base.OnUpdatingRecord(record, changeSet);
+        }
     }
 }

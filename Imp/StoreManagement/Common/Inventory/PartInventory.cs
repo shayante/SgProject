@@ -13,12 +13,10 @@ namespace SystemGroup.Training.StoreManagement.Common
 
         public long StoreRef { get; set; }
 
-        public long UnitRef { get; set; }
-
         public decimal Quantity { get; set; }
 
-
         public string PartTitle { get; set; }
+
         public string UnitTitle { get; set; }
     }
 }
