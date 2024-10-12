@@ -21,7 +21,7 @@ namespace SystemGroup.Training.StoreManagement.Web.Dialog
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        //protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
         /// scriptManager control.
@@ -30,7 +30,7 @@ namespace SystemGroup.Training.StoreManagement.Web.Dialog
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SystemGroup.Web.UI.Controls.SgScriptManager scriptManager;
+        //protected global::SystemGroup.Web.UI.Controls.SgScriptManager scriptManager;
 
         /// <summary>
         /// updMain control.

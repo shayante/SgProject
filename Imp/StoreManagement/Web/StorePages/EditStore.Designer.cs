@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
 using SystemGroup.Training.StoreManagement.Common;
+using SystemGroup.Training.StoreManagement.Web.Dialog;
 using SystemGroup.Web.UI.Bindings;
 using SystemGroup.Web.UI.Controls;
 using SystemGroup.Web.UI.Localization;
@@ -20,10 +21,12 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
 
         #region Controls
 
+        SgFieldSet fsMain;
         SgTextBox txtCode;
         SgTextBox txtName;
         SgGrid grdParts;
         SgHiddenField hiddenFieldPartIdSelection;
+        SgEntityList elParts;
 
         #endregion
 
@@ -32,6 +35,7 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
         private void AddControls()
         {
             var fieldSet = GetMainPlaceHolder().Add<FieldSetView>()
+                .RealizedIn(()=>fsMain)
                 .OnRealized((o) => ((Control)o).ClientIDMode = ClientIDMode.Static);
             var layout = fieldSet.Add<DynamicFieldLayoutView>();
 
@@ -47,6 +51,7 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
             row.SetRequiredValidator();
 
             AddPartGrid();
+            //AddDialog();
 
         }
 
@@ -125,6 +130,48 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
                 .OnRealized(o => ((Control)o).ClientIDMode = ClientIDMode.Static)
                 .OnClick(btnPartSelection_onClick)
                 .Style((s) => s.Display("none"));
+
+        }
+
+        private void  AddDialog()
+        {
+            GetMainPlaceHolder().Add<UpdatePanelView>()
+                .ContentTemplate
+                .Add<DialogLayoutView>()
+                .ID("dlgPartSelection")
+                
+                .OnRealized(o =>
+                {
+                    ((Control)o).ClientIDMode = ClientIDMode.Static;
+                    //((Control)o).Visible = false;
+                })
+                //.Add<DynamicFieldLayoutView>()
+
+                
+                //.AddRow()
+                //.AddCell()
+                //.Add<TextBoxView>()
+                //.Text("Test");
+            .Add<EntityListView>()
+            //.ID("elParts")
+            .AllowMultiRowSelection(true)
+            .AllowGrouping(false)
+            ////.Visible(false)
+            .ComponentName("SystemGroup.Training.StoreManagement")
+            .EntityView<Part>("AvailablePartForStore")
+            
+            .RealizedIn(()=>elParts)
+            .OnRealized(o =>
+            {
+                
+                ((Control)o).ClientIDMode = ClientIDMode.Static;
+                elParts.ViewParameters.Add(new SgViewParameter
+                {
+                    Name = "igonreIDs",
+                    Value = new long[] { 1 }
+                });
+            });
+
 
         }
 

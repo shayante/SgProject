@@ -11,6 +11,7 @@ using SystemGroup.Web;
 using SystemGroup.Web.UI;
 using SystemGroup.Web.UI.Bindings;
 using SystemGroup.Web.UI.Controls;
+using SystemGroup.Web.UI.Localization;
 using SystemGroup.Web.UI.Pages.EditorPage;
 using Telerik.Web.UI;
 
@@ -34,6 +35,15 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
         {
             ScriptManager.Scripts.Add(new ScriptReference("Edit.js"));
             base.OnInit(e);
+        }
+
+        protected override void OnInitComplete(EventArgs e)
+        {
+            base.OnInitComplete(e);
+            fsMain.Controls.Add(LoadControl("~/Training/StoreManagement/Dialog/PartSelectionDialog.ascx"));
+            //var dialogControl = LoadControl("../Dialog/PartSelectionDialog.ascx");
+            //var dialogControl = BuildDialog();
+            //Page.Controls.Add(dialogControl);
         }
 
         protected override void OnCreateViews()
@@ -69,14 +79,44 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
             //TODO check command
             var selectedParts = dsPartStore.Entities.Select(ps => ps.PartRef).ToArray();
             var key = ShortTermSessionState.Current.Add(selectedParts);
+            SgWindow.ShowModalDialog("dlgPartSelection", "PartSelectionDialog", null, new SgWindowProperties
+            {
+                Caption = "انتخاب گروهی کال",
+                Width = 817,
+                Height = 420,
+                VisibleStatusbar = false,
+                OnClientClose = "PartSelection_OnClientClose"
+            });
             //SgWindow.ShowModalDialog(typeof(AddPartDialog),$"partsRefKey={key}", "PartSelectionDialog",this,null);
-            SgWindow.ShowModalDialog<PartSelectionDialog>(
-                $"partsKey={key}",
+            //SgWindow.ShowModalDialog<PartSelectionDialog>(
+            //    $"partsKey={key}",
+            //    "PartSelectionDialog",
+            //    argument: null,
+            //    //queryString:
+            //    onClientClose: "PartSelection_OnClientClose",
+            //    features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'");
+
+         /*   SgWindow.ShowModalDialog(
+                "dlgPartSelection",
                 "PartSelectionDialog",
+                queryString: $"partsKey={key}"
                 argument: null,
-                //queryString:
                 onClientClose: "PartSelection_OnClientClose",
-                features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'");
+                features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'",);
+
+
+            SgWindow.ShowModalDialog(
+                "","",null,new SgWindowProperties
+                {
+                    
+                }
+                );*/
+            //SgWindow.ShowModalDialog(
+            //    $"../Dialog/PartSelectionDialog.ascx?partsKey={key}",
+            //    windowName: "PartSelectionDialog",
+            //    argument: null,
+            //    onClientClose: "PartSelection_OnClientClose",
+            //    features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'");
         }
 
         private void btnPartSelection_onClick(object sender, EventArgs e)
