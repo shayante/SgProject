@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Web.UI;
 using SystemGroup.Framework.Security;
 using SystemGroup.Training.StoreManagement.Common;
+using SystemGroup.Training.StoreManagement.Web.Convention;
 using SystemGroup.Web.UI.Bindings;
 using SystemGroup.Web.UI.Controls;
 using SystemGroup.Web.UI.Views;
+using Telerik.Web.UI;
 
 namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
 {
@@ -22,12 +24,13 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
         private SgDatePicker dpDate;
         private SgLookup lkpType;
         private SgSelector sltStoreKeeper;
-        private SgTextBox txtItemCount;
-        private SgTextBox txtQuantitySum;
+        private SgGrid grdItems;
+        private SgDecimalInput decItemCount;
+        private SgDecimalInput decQuantitySum;
 
         protected override void OnCreateViews()
         {
-
+            
             var layout = GetMainPlaceHolder()
                 .Add<FieldSetView>().LegendKey("Labels_InventoryInfo")
                 .Add<DynamicFieldLayoutView>();
@@ -73,9 +76,10 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
 
         private void AddItemsGrid()
         {
-
+            
             var fieldSet = GetMainPlaceHolder().Add<FieldSetView>().LegendKey("Labels_ItemGrid");
             var grid = fieldSet.Add<GridView<InventoryVoucherItem>>()
+                .Width(782)
                 .AllowDelete(true)
                 .AllowEdit(true)
                 .AllowInsert(true)
@@ -84,7 +88,12 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
                 .DataSourceID(".InventoryVoucherItems")
                 .GridType(SgGridType.ClientSide)
                 .ID("grdInventoryVoucherItem")
-                .OnRealized((o) => ((Control)o).ClientIDMode = ClientIDMode.Predictable);
+                .RealizedIn(()=>grdItems)
+                .OnRealized((o) =>
+                {
+                    ((Control)o).ClientIDMode = ClientIDMode.Predictable;
+                    grdItems.Init += grdItems_Init;
+                });
 
             var columnEditor = grid.Columns.AddSelector()
                 .HeaderText("InventoryVoucherItem_PartTitle")
@@ -152,28 +161,31 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
                 ;
 
 
-
             var layout = fieldSet
-                .Add<FieldSetView>()//Todo set width
-                .Add<DynamicFieldLayoutView>();
+                .Add<FieldSetView>()
+                .Width(784)
+                .Add<DynamicFieldLayoutView>()
+                .Width(784)
+                ;
             var row = layout.AddRow();
             row.SetLabelByKey("Labels_ItemsCount");
-            row.SetInput<TextBoxView>()
-                .Enabled(false)
+            row.SetInput<DecimalInputView>()
+                .ReadOnly(true)
+                .GroupSize(3)
                 .ID("txtItemsCount")
-                .RealizedIn(() => txtItemCount)
+                .RealizedIn(() => decItemCount)
                 .OnRealized(o => ((Control)o).ClientIDMode = ClientIDMode.Static);
 
             row = layout.AddRow();
             row.SetLabelByKey("Labels_QuantitesSum");
-            row.SetInput<TextBoxView>()
-                .Enabled(false)
+            row.SetInput<DecimalInputView>()
+                .ReadOnly(true)
+                .GroupSize(3)
                 .ID("txtQuantitesSum")
-                .RealizedIn(() => txtQuantitySum)
+                .RealizedIn(() => decQuantitySum)
                 .OnRealized(o => ((Control)o).ClientIDMode = ClientIDMode.Static);
 
         }
-
 
     }
 }

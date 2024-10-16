@@ -56,8 +56,8 @@ function ds_onUpdatedEntity(sender, _args) {
 
 function updateItemSum(list) {
 
-    $find("txtItemsCount").set_textBoxValue(list.length);
-    $find("txtQuantitesSum").set_textBoxValue(list.map(i => i.Quantity).reduce((acc, item) => SgMath.add(acc,item), "0"));//TODO use sgMath
+    $find("txtItemsCount").set_value(list.length.toString(),true);
+    $find("txtQuantitesSum").set_value(list.map(i => i.Quantity).reduce((acc, item) => SgMath.add(acc,item), "0"),true);
 }
 
 function decQuntity_ValidationFunction(sender, args) {
