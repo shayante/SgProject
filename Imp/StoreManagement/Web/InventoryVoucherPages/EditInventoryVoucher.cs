@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.PerformanceData;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.UI;
 using SystemGroup.Framework.Business;
-using SystemGroup.Framework.Common;
 using SystemGroup.Framework.Localization;
 using SystemGroup.Training.StoreManagement.Common;
-using SystemGroup.Training.StoreManagement.Web.StorePages;
+using SystemGroup.Training.StoreManagement.Web.Convention;
 using SystemGroup.Web.UI;
 using SystemGroup.Web.UI.Bindings;
 using SystemGroup.Web.UI.Controls;
@@ -27,17 +23,16 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
             get { yield return ".InventoryVoucherItems"; }
         }
 
-        private ISgEntityDataSource dsItems => FindDataSource(ClientSideDetailDataSources.First());
+        private SgEntityDataSource<InventoryVoucherItem> DataSource =>(SgEntityDataSource<InventoryVoucherItem>) FindDataSource(ClientSideDetailDataSources.First());
 
         public override DetailLoadOptions EntityLoadOptions => LoadOptions.With<InventoryVoucher>(i => i.InventoryVoucherItems);
-
 
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
             ScriptManager.Scripts.Add(new ScriptReference("Edit.js"));
-            dsItems.RegisterDecimalPropertySerializedAsString(nameof(InventoryVoucherItem.Quantity));
-
+            DataSource.RegisterDecimalPropertySerializedAsString(nameof(InventoryVoucherItem.Quantity));
+            
         }
 
         protected override void OnCreateBindings(SgDataSourceEditorBindingContext<InventoryVoucher> context)
@@ -54,7 +49,7 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
         {
             base.OnLoad(e);
 
-            var ds = dsItems;
+            var ds = DataSource;
             ds.OnClientInsertedEntity = "ds_onInsertedEntity";
             ds.OnClientRemovedEntity = "ds_onRemovedEntity";
             ds.OnClientUpdatedEntity = "ds_onUpdatedEntity";
@@ -68,13 +63,14 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
             CurrentEntity?.FillItemsProperties();
 
 
-            var ds = dsItems;
+            var ds = DataSource;
             sltStore.Enabled = ds.Entities.Count == 0;
 
-            txtItemCount.Text =  ds.Entities.Count.ToString();
-            txtQuantitySum.Text = ds.Entities.Cast<InventoryVoucherItem>().Sum(i => i.Quantity).ToString("N2");
+            decItemCount.Value = ds.Entities.Count;
+            decQuantitySum.Value = ds.Entities.Sum(i => i.Quantity);
 
-            
+
+            FillExtraColumns();
 
         }
 
@@ -87,12 +83,41 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
         }
 
 
+        private void AddExtraColumns()
+        {
+            var implementations = new SgConventionExecutor<IInventoryVoucherExtraColumn>().Implementations;
+
+            foreach (var imp in implementations)
+            {
+                if (imp.HasColumn(Convert.ToInt64(Request.QueryString["id"])))
+                {
+                    imp.AddColumn(grdItems);
+                }
+            }
+        }
+
+
+        private void FillExtraColumns()
+        {
+            var implementations = new SgConventionExecutor<IInventoryVoucherExtraColumn>().Implementations;
+
+            foreach (var imp in implementations)
+            {
+                imp.FillExtraProperies(DataSource);
+            }
+        }
+
+        private void grdItems_Init(object sender, EventArgs e)
+        {
+            AddExtraColumns();
+        }
 
         private void sltPart_OnItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
         {
 
             var slt = (SgSelector)sender;
-            var ignores = ((IEnumerable)e.Context["IgnoreIDs"]).Cast<object>()
+            var ignores = ((IEnumerable)e.Context["IgnoreIDs"])
+                .Cast<object>()
                 .Select(x => Convert.ToInt64(x));
 
             slt.FilterExpression = i => !ignores.Contains(((PartInventory)i).PartRef);
