@@ -18,6 +18,9 @@
 		<Reference Include="SystemGroup.Training.Pricing.Common">
 			<HintPath>$(OutputPath)\SystemGroup.Training.Pricing.Common.dll</HintPath>
 		</Reference>
+		<Reference Include="SystemGroup.Training.StoreManagement.Common">
+			<HintPath>$(OutputPath)\SystemGroup.Training.StoreManagement.Common.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 
 </Project>
