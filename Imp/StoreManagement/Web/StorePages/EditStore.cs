@@ -65,18 +65,19 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
 
         private void grdPart_onCommand(object sender, SgGridCommandEventArgs args)
         {
-
-            //TODO check command
-            var selectedParts = dsPartStore.Entities.Select(ps => ps.PartRef).ToArray();
-            var key = ShortTermSessionState.Current.Add(selectedParts);
-            //SgWindow.ShowModalDialog(typeof(AddPartDialog),$"partsRefKey={key}", "PartSelectionDialog",this,null);
-            SgWindow.ShowModalDialog<PartSelectionDialog>(
-                $"partsKey={key}",
-                "PartSelectionDialog",
-                argument: null,
-                //queryString:
-                onClientClose: "PartSelection_OnClientClose",
-                features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'");
+            if(args.UniqueName == "AddMultiple")
+            {
+                var selectedParts = dsPartStore.Entities.Select(ps => ps.PartRef).ToArray();
+                var key = ShortTermSessionState.Current.Add(selectedParts);
+                //SgWindow.ShowModalDialog(typeof(AddPartDialog),$"partsRefKey={key}", "PartSelectionDialog",this,null);
+                SgWindow.ShowModalDialog<PartSelectionDialog>(
+                    $"partsKey={key}",
+                    "PartSelectionDialog",
+                    argument: null,
+                    //queryString:
+                    onClientClose: "PartSelection_OnClientClose",
+                    features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'");
+            }
         }
 
         private void btnPartSelection_onClick(object sender, EventArgs e)
