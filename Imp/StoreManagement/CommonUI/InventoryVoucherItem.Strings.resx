@@ -123,4 +123,16 @@
   <data name="Quantity" xml:space="preserve">
     <value>مقدار</value>
   </data>
+  <data name="PartCode" xml:space="preserve">
+    <value>کد کالا</value>
+  </data>
+  <data name="PartTitle" xml:space="preserve">
+    <value>عنوان کالا</value>
+  </data>
+  <data name="UnitTitle" xml:space="preserve">
+    <value>واحد سنجش کالا</value>
+  </data>
+  <data name="PartTitle1" xml:space="preserve">
+    <value>عنوان کالا</value>
+  </data>
 </root>

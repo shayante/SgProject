@@ -33,6 +33,7 @@ namespace SystemGroup.Training.StoreManagement.Common
 
             Transitions.Add(new ManualTransition(registered, confirmed, "Labels_ConfirmVoucher", securityKey: "Confirm"));
             Transitions.Add(new ManualTransition(registered, invalidated, "Labels_InvalidateVoucher", securityKey: "Invalidate"));
+            Transitions.Add(new ManualTransition(confirmed, registered, "Labels_ReturnFromConfirmed", securityKey: "ReturnFromConfirmed"));
 
         }
     }

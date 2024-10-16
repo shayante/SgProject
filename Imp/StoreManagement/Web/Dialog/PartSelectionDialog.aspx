@@ -34,6 +34,7 @@
                     </sg:SgTableRow>
                     <sg:SgTableRow>
                         <sg:SgTableCell>
+                            <sg:SgButton ID="btnSelectAll" runat="server" TextKey="Labels_ApplyAll" OnClick="btnSelectAll_Click"  /> 
                             <sg:SgButton ID="btnOk" runat="server" TextKey="Labels_ApplySelection" OnClick="btnOK_Click"  /> 
                
                             <sg:SgButton ID="btnCancel" runat="server" TextKey="Labels_CancelSelection" OnClientClick="btnCancel_ClientClick(event)"  />

@@ -39,14 +39,6 @@ GO
 
 --<< INDEXES DEFINITION >>--
 
-If not Exists (select 1 from sys.indexes where name = 'IX_TRN3_PartStore_PartRef_StoreRef')
-ALTER TABLE [TRN3].[PartStore] ADD  CONSTRAINT [IX_TRN3_PartStore_PartRef_StoreRef] UNIQUE NONCLUSTERED 
-(
-	[PartRef] ASC,
-	[StoreRef] ASC
-) ON [PRIMARY]
-
-GO
 --<< FOREIGNKEYS DEFINITION >>--
 
 If not Exists (select 1 from sys.objects where name = 'FK_TRN3_PartStore_PartRef')

@@ -13,20 +13,14 @@ namespace SystemGroup.Training.StoreManagement.Business
     [Service]
     public class StoreBusiness : BusinessBase<Store>, IStoreBusiness
     {
-        
-        protected override void OnSavingRecord(Store record, List<Pair<Entity, EntityActionType>> changeSet)
+        protected override void OnUpdatingRecord(Store record, List<Pair<Entity, EntityActionType>> changeSet)
         {
-            if (FetchAll().Where(s => s.ID != record.ID).Select(s => s.Code).Any(code => code == record.Code))
+            var inventoryVouchers = ServiceFactory.Create<IInventoryVoucherBusiness>().FetchAll();
+            if (inventoryVouchers.Any(i => i.StoreRef == record.ID))
             {
-                throw this.CreateException("Messages_StoreCodeDuplicated");
+                throw this.CreateException("Messages_CannotEditStoreWhenUsedInInventoryVoucher");
             }
-
-            if (FetchAll().Where(s => s.ID != record.ID).Select(s => s.Name).Any(name => name == record.Name))
-            {
-                throw this.CreateException("Messages_StoreNameDuplicated");
-            }
-
-            base.OnSavingRecord(record, changeSet);
+            base.OnUpdatingRecord(record, changeSet);
         }
     }
 }

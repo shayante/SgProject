@@ -20,9 +20,8 @@ namespace SystemGroup.Training.StoreManagement.Common
             var partyBiz = ServiceFactory.Create<IPartyService>();
 
             return from iv in inputs
-                   join store in sotreBiz.FetchAll()
-                   on iv.StoreRef equals store.ID
-                   join sk in sotreKeeperBiz.FetchAll() on iv.StoreRef equals sk.ID
+                   join store in sotreBiz.FetchAll() on iv.StoreRef equals store.ID
+                   join sk in sotreKeeperBiz.FetchAll() on iv.StoreKeeperRef equals sk.ID
                    join party in partyBiz.FetchAllParties() on sk.PartyRef equals party.ID
                    select new
                    {

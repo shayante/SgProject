@@ -138,4 +138,23 @@
   <data name="StoreKeeperExistsInVoucher" xml:space="preserve">
     <value>برای این انباردار سند انبار ثبت شده است.</value>
   </data>
+  <data name="QuntityIsOutOfRange" xml:space="preserve">
+    <value>مقدار انتخاب شده باید بزرگتر از 0 باشد.</value>
+  </data>
+  <data name="SelectStoreToAddItem" xml:space="preserve">
+    <value>برای اضافه کردن قلم انبار لازم است ابتدا انبار را انتخاب کنید.</value>
+  </data>
+  <data name="CannotEditUnitWhenUsedInInventoryVoucherItem" xml:space="preserve">
+    <value>این واحد سنجش در اقلام سند انبار استفاده شده است و نمیتوانید ان را ویرایش کنید.</value>
+  </data>
+  <data name="CannotEditPartWhenUsedInInventoryVoucherItem" xml:space="preserve">
+    <value>این کالا در اقلام سند انبار استفاده شده است و نمیتوانید ان را ویراش کنید.</value>
+  </data>
+  <data name="CannotEditStoreWhenUsedInInventoryVoucher" xml:space="preserve">
+    <value>برای این انبار سند ثبت شده است و نمیتوانید آن را ویرایش کنید.</value>
+  </data>
+  <data name="InventoryCannotBeNegative" xml:space="preserve">
+    <value>موجودی کالا نمیتواند منفی باشد.
+کالای {0} ، {1} {2} بیشتر از موجودی انتخاب شده است.</value>
+  </data>
 </root>

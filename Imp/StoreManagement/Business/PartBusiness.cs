@@ -13,25 +13,21 @@ namespace SystemGroup.Training.StoreManagement.Business
     [Service]
     public class PartBusiness : BusinessBase<Part>, IPartBusiness
     {
+
         public virtual IQueryable<Part> FetchPartsExcept(long[] igonreIDs)
         {
             return FetchAll().Where(p => !igonreIDs.Contains(p.ID));
         }
 
-
-        
-        protected override void OnSavingRecord(Part record, List<Pair<Entity, EntityActionType>> changeSet)
+        protected override void OnUpdatingRecord(Part record, List<Pair<Entity, EntityActionType>> changeSet)
         {
-            if (FetchAll().Where(p=>p.ID != record.ID).Select(p => p.Code).Any(code => code == record.Code))
+            var items = ServiceFactory.Create<IInventoryVoucherBusiness>().FetchDetail<InventoryVoucherItem>();
+            if (items.Any(i => i.PartRef == record.ID))
             {
-                throw this.CreateException("Messages_PartCodeDuplicated");
+                throw this.CreateException("Messages_CannotEditPartWhenUsedInInventoryVoucherItem");
             }
 
-            if (FetchAll().Where(p => p.ID != record.ID).Select(p => p.Title).Any(title => title == record.Title))
-            {
-                throw this.CreateException("Messages_PartTitleDuplicated");
-            }
-            base.OnSavingRecord(record, changeSet);
+            base.OnUpdatingRecord(record, changeSet);
         }
     }
 }

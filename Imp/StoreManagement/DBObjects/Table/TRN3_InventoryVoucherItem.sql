@@ -40,14 +40,6 @@ GO
 
 --<< INDEXES DEFINITION >>--
 
-If not Exists (select 1 from sys.indexes where name = 'IX_TRN3_InventoryVoucherItem_InventoryVoucherRef_PartRef')
-ALTER TABLE [TRN3].[InventoryVoucherItem] ADD  CONSTRAINT [IX_TRN3_InventoryVoucherItem_InventoryVoucherRef_PartRef] UNIQUE NONCLUSTERED 
-(
-	[InventoryVoucherRef] ASC,
-	[PartRef] ASC
-) ON [PRIMARY]
-
-GO
 --<< FOREIGNKEYS DEFINITION >>--
 
 If not Exists (select 1 from sys.objects where name = 'FK_TRN3_InventoryVoucherItem_InventoryVoucherRef')

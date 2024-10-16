@@ -1,25 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using SystemGroup.Framework.Business;
 using SystemGroup.Framework.Common;
-using SystemGroup.Framework.Lookup;
 using SystemGroup.Framework.MetaData;
 using SystemGroup.Framework.MetaData.Mapping;
+using SystemGroup.Framework.Party;
 using SystemGroup.Framework.Service;
-using SystemGroup.Framework.StateManagement;
+using SystemGroup.Framework.Utilities;
 
 namespace SystemGroup.Training.StoreManagement.Common
 {
     [Serializable]
     [Master(typeof(IInventoryVoucherBusiness))]
     [DataNature(DataNature.MasterData)]
-    [SearchFields()]
-    partial class InventoryVoucher : Entity
+    [SearchFields("Number")]
+    partial class InventoryVoucher : Entity, INumberedEntity, ITrackedEntity
     {
+
+        #region Properties
+        public string StoreKeeperFullName { get; set; }
+
+
+        #endregion
+
         #region Methods
+
+        public override void SetDefaultValues()
+        {
+            base.SetDefaultValues();
+            Date = DateTime.Today;
+            Type = InventoryVoucherType.Enter;
+        }
 
         public override string GetEntityName()
         {
@@ -38,6 +49,39 @@ namespace SystemGroup.Training.StoreManagement.Common
 
 
         }
+
+        public void FillItemsProperties()
+        {
+            var partBiz = ServiceFactory.Create<IPartBusiness>();
+            var inventoryBiz = ServiceFactory.Create<IInventoryVoucherBusiness>();
+            var unitBiz = ServiceFactory.Create<IUnitBusiness>();
+
+            var parts = (from item in inventoryBiz.FetchDetail<InventoryVoucherItem>()
+                         where item.InventoryVoucherRef == ID
+                         join part in partBiz.FetchAll() on item.PartRef equals part.ID
+                         join unit in unitBiz.FetchAll() on part.UnitRef equals unit.ID
+                         select new {part,unit}
+                        ).ToDictionary(pu => pu.part.ID);
+            
+
+            //var parts = InventoryVoucherItems.Select(i => i.Part).ToDictionary(p => p.ID);
+            foreach (var item in InventoryVoucherItems)
+            {
+                item.PartCode = parts[item.PartRef].part.Code;
+                item.PartTitle = parts[item.PartRef].part.Title;
+                item.UnitTitle = parts[item.PartRef].unit.Title;
+
+            }
+        }
+
+        public InventoryVoucher FillPartyProperty()
+        {
+            var skBiz = ServiceFactory.Create<IStoreKeeperBusiness>();
+            var partyRef = ServiceFactory.Create<IPartyService>();
+            StoreKeeperFullName = partyRef.FetchPartyById(skBiz.FetchByID(StoreKeeperRef).Select(sk => sk.PartyRef).First()).FullName;
+            return this;
+        }
+
 
         #endregion
     }

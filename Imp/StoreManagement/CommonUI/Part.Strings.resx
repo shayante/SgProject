@@ -129,4 +129,7 @@
   <data name="UnitRef" xml:space="preserve">
     <value>واحد سنجش</value>
   </data>
+  <data name="InventoryQuantity" xml:space="preserve">
+    <value>موجودی کالا</value>
+  </data>
 </root>
