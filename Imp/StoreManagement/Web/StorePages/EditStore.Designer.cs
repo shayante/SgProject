@@ -71,9 +71,7 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
                 .ValidationGroup(VgGrid)
                 .DataSourceID(".PartStores")
                 .OnCommand(grdPart_onCommand)
-                ;
-
-            
+                ;  
 
             grid.AddCommand("AddMultiple")
                 .TextKey("Labels_AddMultipleParts")

@@ -168,4 +168,7 @@
   <data name="ItemGrid" xml:space="preserve">
     <value>اطلاعات اقلام سند</value>
   </data>
+  <data name="ReturnFromConfirmed" xml:space="preserve">
+    <value>بازگشت از تأیید</value>
+  </data>
 </root>
