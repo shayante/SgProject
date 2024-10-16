@@ -4,7 +4,9 @@ using System.Linq;
 using SystemGroup.Framework.Common;
 using SystemGroup.Framework.MetaData;
 using SystemGroup.Framework.MetaData.Mapping;
+using SystemGroup.Framework.Party;
 using SystemGroup.Framework.Service;
+using SystemGroup.Framework.Utilities;
 
 namespace SystemGroup.Training.StoreManagement.Common
 {
@@ -14,6 +16,13 @@ namespace SystemGroup.Training.StoreManagement.Common
     [SearchFields("Number")]
     partial class InventoryVoucher : Entity, INumberedEntity, ITrackedEntity
     {
+
+        #region Properties
+        public string StoreKeeperFullName { get; set; }
+
+
+        #endregion
+
         #region Methods
 
         public override void SetDefaultValues()
@@ -64,6 +73,15 @@ namespace SystemGroup.Training.StoreManagement.Common
 
             }
         }
+
+        public InventoryVoucher FillPartyProperty()
+        {
+            var skBiz = ServiceFactory.Create<IStoreKeeperBusiness>();
+            var partyRef = ServiceFactory.Create<IPartyService>();
+            StoreKeeperFullName = partyRef.FetchPartyById(skBiz.FetchByID(StoreKeeperRef).Select(sk => sk.PartyRef).First()).FullName;
+            return this;
+        }
+
 
         #endregion
     }
