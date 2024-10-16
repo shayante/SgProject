@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SystemGroup.Framework.Security;
 using SystemGroup.Framework.Service;
 using SystemGroup.General.PartyManagement.Common;
 using SystemGroup.Training.StoreManagement.Common;
+using SystemGroup.Training.StoreManagement.Web.Convention;
 using SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages;
 using SystemGroup.Training.StoreManagement.Web.PartPages;
 using SystemGroup.Training.StoreManagement.Web.StorePages;
@@ -156,6 +158,11 @@ namespace SystemGroup.Training.StoreManagement.Web
         protected override IEnumerable<PageExtension> GetExtensions()
         {
             yield return new EditorPageExtension<Party>("Training.StoreManagement:StoreKeeper_StoreKeeper", "/Extension/StoreKeeperExtension.ascx");
+        }
+
+        protected override IEnumerable<ConventionInfo> GetConventions()
+        {
+            yield return new ConventionInfo(typeof(IInventoryVoucherExtraColumn));
         }
 
         public override List<ComponentLink> RegisterLinks()
