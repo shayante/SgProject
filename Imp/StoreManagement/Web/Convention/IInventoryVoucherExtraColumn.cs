@@ -14,7 +14,7 @@ namespace SystemGroup.Training.StoreManagement.Web.Convention
     {
 
         bool HasColumn(long ivID);// => HasColumn(ServiceFactory.Create<IInventoryVoucherBusiness>().FetchByID(ivID).First());
-        bool HasColumn(InventoryVoucher iv);
+        
         void AddColumn(SgGrid grid);
         void FillExtraProperies(SgEntityDataSource<InventoryVoucherItem> dataSource);
 

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using SystemGroup.Framework.Service;
 using SystemGroup.Training.Pricing.Common;
 using SystemGroup.Training.StoreManagement.Common;
@@ -12,11 +13,13 @@ namespace SystemGroup.Training.Pricing.Web.Conventions
     internal class InventoryVoucherPricing : IInventoryVoucherExtraColumn
     {
 
-        public bool HasColumn(long ivID) =>
-            HasColumn(ServiceFactory.Create<IInventoryVoucherBusiness>().FetchByID(ivID).First());
+        public bool HasColumn(long ivID)
+        {
+            var iv = ServiceFactory.Create<IInventoryVoucherBusiness>().FetchByID(ivID).FirstOrDefault();
+            if (iv == null) return false;
+            return iv.Type == InventoryVoucherType.Enter && iv.State == InventoryVoucherState.Confirmed;
+        }
 
-        public bool HasColumn(InventoryVoucher iv) =>
-            iv.Type == InventoryVoucherType.Enter && iv.State == InventoryVoucherState.Confirmed;
 
 
         public void AddColumn(SgGrid grid)

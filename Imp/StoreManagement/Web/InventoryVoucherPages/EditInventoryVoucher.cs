@@ -89,7 +89,8 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
 
             foreach (var imp in implementations)
             {
-                if (imp.HasColumn(Convert.ToInt64(Request.QueryString["id"])))
+                
+                if (imp.HasColumn(Convert.ToInt64(Request.QueryString?["id"] ?? "0")))
                 {
                     imp.AddColumn(grdItems);
                 }
