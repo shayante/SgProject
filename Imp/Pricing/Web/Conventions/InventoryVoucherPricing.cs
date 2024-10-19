@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using SystemGroup.Framework.Service;
+using SystemGroup.Framework.Utilities;
 using SystemGroup.Training.Pricing.Common;
 using SystemGroup.Training.StoreManagement.Common;
 using SystemGroup.Training.StoreManagement.Web.Convention;
@@ -12,32 +14,47 @@ namespace SystemGroup.Training.Pricing.Web.Conventions
     internal class InventoryVoucherPricing : IInventoryVoucherExtraColumn
     {
 
-        public bool HasColumn(long ivID) =>
-            HasColumn(ServiceFactory.Create<IInventoryVoucherBusiness>().FetchByID(ivID).First());
 
-        public bool HasColumn(InventoryVoucher iv) =>
-            iv.Type == InventoryVoucherType.Enter && iv.State == InventoryVoucherState.Confirmed;
-
-
-        public void AddColumn(SgGrid grid)
+        public void ConfigExtraColumn(SgGrid grid, InventoryVoucher iv)
         {
-            var column = new SgDecimalGridColumn
+
+            var shouldAdd = iv != null && iv.ID > 0 && iv.Type == InventoryVoucherType.Enter && iv.State == InventoryVoucherState.Confirmed;
+
+            if (shouldAdd)
             {
-                AllowEdit = false,
-                HeaderText = Translator.Translate("Training.Pricing:Labels_Price"),
-                GroupSize = 3,
-                Precision = 2,
-                PropertyName = "ExtraPropery",
-                
+               if(!grid.Columns.Any(c=>c.UniqueName == "PriceColumn"))
+                {
+                    var column = new SgDecimalGridColumn
+                    {
+                        AllowEdit = false,
+                        HeaderText = Translator.Translate("Training.Pricing:Labels_Price"),
+                        GroupSize = 3,
+                        Precision = 2,
+                        PropertyName = "ExtraPropery",
+                        UniqueName = "PriceColumn",
+                        
 
-            };
 
-            grid.Columns.Add(column);
+                    };
+
+                    grid.Columns.Add(column);
+                    grid.Rebuild();
+                    FillExtraProperies((SgEntityDataSource<InventoryVoucherItem>)grid.DataSourceObject);
+                }
+            }
+            else
+            {
+                grid.Columns.TryRemoveFirst(c => c.UniqueName == "PriceColumn", out SgGridColumn delColumn);
+            }
+
+
+
+            
             
 
         }
 
-        public void FillExtraProperies(SgEntityDataSource<InventoryVoucherItem> dataSource)
+        private void FillExtraProperies(SgEntityDataSource<InventoryVoucherItem> dataSource)
         {
             var priceBiz = ServiceFactory.Create<IItemPriceBusiness>();
             var ItemIds = dataSource.Entities.Select(i => i.ID);

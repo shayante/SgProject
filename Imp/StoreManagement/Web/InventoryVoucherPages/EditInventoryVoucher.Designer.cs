@@ -92,7 +92,6 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
                 .OnRealized((o) =>
                 {
                     ((Control)o).ClientIDMode = ClientIDMode.Predictable;
-                    grdItems.Init += grdItems_Init;
                 });
 
             var columnEditor = grid.Columns.AddSelector()

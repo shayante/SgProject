@@ -53,8 +53,9 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
             ds.OnClientInsertedEntity = "ds_onInsertedEntity";
             ds.OnClientRemovedEntity = "ds_onRemovedEntity";
             ds.OnClientUpdatedEntity = "ds_onUpdatedEntity";
-
         }
+
+        
 
 
         protected override void OnEntityLoaded(object sender, EntityLoadedEventArgs e)
@@ -69,8 +70,8 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
             decItemCount.Value = ds.Entities.Count;
             decQuantitySum.Value = ds.Entities.Sum(i => i.Quantity);
 
-
-            FillExtraColumns();
+            HandleExtraColumns();
+            
 
         }
 
@@ -80,36 +81,31 @@ namespace SystemGroup.Training.StoreManagement.Web.InventoryVoucherPages
         {
             base.OnEntityCreated(sender, e);
             sltStore.Enabled = true;
+            HandleExtraColumns();
+        }
+
+        protected override void OnEntityChanged(object sender, EntityChangedEventArgs e)
+        {
+            base.OnEntityChanged(sender, e);
+            
+        }
+
+        protected override void OnEntitySaved(object sender, EntitySavedEventArgs e)
+        {
+            base.OnEntitySaved(sender, e);
+            HandleExtraColumns();
         }
 
 
-        private void AddExtraColumns()
+        private void HandleExtraColumns()
         {
             var implementations = new SgConventionExecutor<IInventoryVoucherExtraColumn>().Implementations;
 
             foreach (var imp in implementations)
             {
-                if (imp.HasColumn(Convert.ToInt64(Request.QueryString["id"])))
-                {
-                    imp.AddColumn(grdItems);
-                }
+
+                imp.ConfigExtraColumn(grdItems,CurrentEntity);
             }
-        }
-
-
-        private void FillExtraColumns()
-        {
-            var implementations = new SgConventionExecutor<IInventoryVoucherExtraColumn>().Implementations;
-
-            foreach (var imp in implementations)
-            {
-                imp.FillExtraProperies(DataSource);
-            }
-        }
-
-        private void grdItems_Init(object sender, EventArgs e)
-        {
-            AddExtraColumns();
         }
 
         private void sltPart_OnItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
