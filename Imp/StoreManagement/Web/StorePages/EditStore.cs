@@ -6,12 +6,9 @@ using System.Web.UI;
 using SystemGroup.Framework.Business;
 using SystemGroup.Framework.Service;
 using SystemGroup.Training.StoreManagement.Common;
-using SystemGroup.Training.StoreManagement.Web.Dialog;
-using SystemGroup.Web;
 using SystemGroup.Web.UI;
 using SystemGroup.Web.UI.Bindings;
 using SystemGroup.Web.UI.Controls;
-using SystemGroup.Web.UI.Localization;
 using SystemGroup.Web.UI.Pages.EditorPage;
 using Telerik.Web.UI;
 
@@ -19,6 +16,9 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
 {
     public partial class EditStore : SgEditorView<Store>
     {
+
+        private Control _dialog;
+
         private SgEntityDataSource<PartStore> dsPartStore =>
             (SgEntityDataSource<PartStore>)FindDataSource(".PartStores");
 
@@ -40,10 +40,8 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
         protected override void OnInitComplete(EventArgs e)
         {
             base.OnInitComplete(e);
-            fsMain.Controls.Add(LoadControl("~/Training/StoreManagement/Dialog/PartSelectionDialog.ascx"));
-            //var dialogControl = LoadControl("../Dialog/PartSelectionDialog.ascx");
-            //var dialogControl = BuildDialog();
-            //Page.Controls.Add(dialogControl);
+            _dialog = LoadControl("~/Training/StoreManagement/Dialog/PartSelectionDialog.ascx");
+            fsMain.Controls.Add(_dialog);
         }
 
         protected override void OnCreateViews()
@@ -76,9 +74,12 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
         private void grdPart_onCommand(object sender, SgGridCommandEventArgs args)
         {
 
-            //TODO check command
             var selectedParts = dsPartStore.Entities.Select(ps => ps.PartRef).ToArray();
-            var key = ShortTermSessionState.Current.Add(selectedParts);
+
+            var elParts = (SgEntityList)_dialog.FindControl("elParts");
+            elParts.ViewParameters[0].Value = selectedParts;
+            elParts.RefreshData();
+
             SgWindow.ShowModalDialog("dlgPartSelection", "PartSelectionDialog", null, new SgWindowProperties
             {
                 Caption = "انتخاب گروهی کال",
@@ -87,42 +88,17 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
                 VisibleStatusbar = false,
                 OnClientClose = "PartSelection_OnClientClose"
             });
-            //SgWindow.ShowModalDialog(typeof(AddPartDialog),$"partsRefKey={key}", "PartSelectionDialog",this,null);
-            //SgWindow.ShowModalDialog<PartSelectionDialog>(
-            //    $"partsKey={key}",
-            //    "PartSelectionDialog",
-            //    argument: null,
-            //    //queryString:
-            //    onClientClose: "PartSelection_OnClientClose",
-            //    features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'");
-
-         /*   SgWindow.ShowModalDialog(
-                "dlgPartSelection",
-                "PartSelectionDialog",
-                queryString: $"partsKey={key}"
-                argument: null,
-                onClientClose: "PartSelection_OnClientClose",
-                features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'",);
-
-
-            SgWindow.ShowModalDialog(
-                "","",null,new SgWindowProperties
-                {
-                    
-                }
-                );*/
-            //SgWindow.ShowModalDialog(
-            //    $"../Dialog/PartSelectionDialog.ascx?partsKey={key}",
-            //    windowName: "PartSelectionDialog",
-            //    argument: null,
-            //    onClientClose: "PartSelection_OnClientClose",
-            //    features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'");
         }
 
         private void btnPartSelection_onClick(object sender, EventArgs e)
         {
-            var key = hiddenFieldPartIdSelection.Value as string;
-            var ids = (long[])ShortTermSessionState.Current[key];
+            if (_dialog == null) return;
+
+            var elParts = (SgEntityList)_dialog.FindControl("elParts");
+
+
+            var ids = elParts.SelectedRecordIDs.ToArray();
+            
 
             var list = ServiceFactory.Create<IPartBusiness>()
                 .FetchByID(ids)

@@ -76,14 +76,5 @@ namespace SystemGroup.Training.StoreManagement.Web.Dialog
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::SystemGroup.Web.UI.Controls.SgButton btnCancel;
-
-        /// <summary>
-        /// hiddenFieldPartIdSelection control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::SystemGroup.Web.UI.Controls.SgHiddenField hiddenFieldPartIdSelection;
     }
 }
