@@ -13,10 +13,10 @@ namespace SystemGroup.Training.StoreManagement.Web.Convention
     public interface IInventoryVoucherExtraColumn: IConvention
     {
 
-        bool HasColumn(long ivID);// => HasColumn(ServiceFactory.Create<IInventoryVoucherBusiness>().FetchByID(ivID).First());
-        
-        void AddColumn(SgGrid grid);
-        void FillExtraProperies(SgEntityDataSource<InventoryVoucherItem> dataSource);
+        void ConfigExtraColumn(SgGrid grid,InventoryVoucher iv);
+
+
+
 
 
     }
