@@ -18,6 +18,9 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
 {
     public partial class EditStore : SgEditorView<Store>
     {
+
+        private Control _dialog;
+
         private SgEntityDataSource<PartStore> dsPartStore =>
             (SgEntityDataSource<PartStore>)FindDataSource(".PartStores");
 
@@ -34,6 +37,13 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
         {
             ScriptManager.Scripts.Add(new ScriptReference("Edit.js"));
             base.OnInit(e);
+        }
+
+        protected override void OnInitComplete(EventArgs e)
+        {
+            base.OnInitComplete(e);
+            _dialog = LoadControl("~/Training/StoreManagement/Dialog/PartSelectionDialog.ascx");
+            fsMain.Controls.Add(_dialog);
         }
 
         protected override void OnCreateViews()
@@ -68,22 +78,31 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
             if(args.UniqueName == "AddMultiple")
             {
                 var selectedParts = dsPartStore.Entities.Select(ps => ps.PartRef).ToArray();
-                var key = ShortTermSessionState.Current.Add(selectedParts);
-                //SgWindow.ShowModalDialog(typeof(AddPartDialog),$"partsRefKey={key}", "PartSelectionDialog",this,null);
-                SgWindow.ShowModalDialog<PartSelectionDialog>(
-                    $"partsKey={key}",
-                    "PartSelectionDialog",
-                    argument: null,
-                    //queryString:
-                    onClientClose: "PartSelection_OnClientClose",
-                    features: "height: 420, width: 817, visibleStatusbar: false, caption:'انتخاب گروهی کالا'");
+                
+                var elParts = (SgEntityList)_dialog.FindControl("elParts");
+                elParts.ViewParameters[0].Value = selectedParts;
+                elParts.RefreshData();
+                
+                SgWindow.ShowModalDialog("dlgPartSelection", "PartSelectionDialog", null, new SgWindowProperties
+                {
+                    Caption = "انتخاب گروهی کالا",
+                    Width = 817,
+                    Height = 420,
+                    VisibleStatusbar = false,
+                    OnClientClose = "PartSelection_OnClientClose"
+                });
             }
         }
 
         private void btnPartSelection_onClick(object sender, EventArgs e)
         {
-            var key = hiddenFieldPartIdSelection.Value as string;
-            var ids = (long[])ShortTermSessionState.Current[key];
+            if (_dialog == null) return;
+
+            var elParts = (SgEntityList)_dialog.FindControl("elParts");
+
+
+            var ids = elParts.SelectedRecordIDs.ToArray();
+            
 
             var list = ServiceFactory.Create<IPartBusiness>()
                 .FetchByID(ids)

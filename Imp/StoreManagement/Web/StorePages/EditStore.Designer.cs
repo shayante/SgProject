@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.UI;
 using SystemGroup.Training.StoreManagement.Common;
 using SystemGroup.Web.UI.Bindings;
@@ -20,10 +16,12 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
 
         #region Controls
 
+        SgFieldSet fsMain;
         SgTextBox txtCode;
         SgTextBox txtName;
         SgGrid grdParts;
         SgHiddenField hiddenFieldPartIdSelection;
+        SgEntityList elParts;
 
         #endregion
 
@@ -32,6 +30,7 @@ namespace SystemGroup.Training.StoreManagement.Web.StorePages
         private void AddControls()
         {
             var fieldSet = GetMainPlaceHolder().Add<FieldSetView>()
+                .RealizedIn(()=>fsMain)
                 .OnRealized((o) => ((Control)o).ClientIDMode = ClientIDMode.Static);
             var layout = fieldSet.Add<DynamicFieldLayoutView>();
 

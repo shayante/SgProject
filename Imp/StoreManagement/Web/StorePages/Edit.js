@@ -28,15 +28,14 @@ function sltPart_onItemRequesting(sender, args) {
 function PartSelection_OnClientClose(sender, args) {
     const result = sender.get_returnValue();
     if (result) {
-        const hiddenFieldPartIdSelection = $find("hiddenFieldPartIdSelection");
-        hiddenFieldPartIdSelection.set_value(result);
         setTimeout("$get('btnPartSelection').click()", 1);
     }
 }
 
 function btnOK_ClientClick(ev) {
+
     SgCancelBrowserEvent(ev);
-    Sg.Window.getCurrent().close(ev);
+    Sg.Window.getCurrent().close(true);
 }
 
 function btnCancel_ClientClick(ev) {

@@ -9,7 +9,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Dialog\PartSelectionDialog.ascx" />
 	  <None Remove="Dialog\PartSelectionDialog.aspx" />
+	  <None Remove="Dialog\PartSelectionDialog.ascx" />
 	  <None Remove="Extension\StoreKeeperExtension.ascx" />
 	  <None Remove="InventoryVoucherPages\Edit.js" />
 	</ItemGroup>
