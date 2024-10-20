@@ -2,6 +2,7 @@
 using System.Linq;
 using SystemGroup.Framework.Business;
 using SystemGroup.Framework.Common;
+using SystemGroup.Framework.DAL;
 using SystemGroup.Framework.Localization;
 using SystemGroup.Framework.Service;
 using SystemGroup.Framework.Utilities;
@@ -17,8 +18,13 @@ namespace SystemGroup.Training.StoreManagement.Business
 
         protected override void OnRecordSaved(InventoryVoucher record, List<Pair<Entity, EntityActionType>> changeSet)
         {
-            ControlInventory(record.StoreRef);
-            base.OnRecordSaved(record, changeSet);
+
+            using(DbResourceLock.AcquireOutsideOfTransaction(nameof(StoreManagement), nameof(InventoryVoucher)))
+            {
+                ControlInventory(record.StoreRef);
+                base.OnRecordSaved(record, changeSet);
+            }
+            
 
         }
 
